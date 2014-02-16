@@ -4,25 +4,36 @@ class Campaign < ActiveRecord::Base
   # require 'CSV'
 
   def self.import(file)
-    CSV.foreach(file) do |row|
+    CSV.foreach(file, headers: true) do |row|
+      # debugger
+      # row = convert(row)
+      # # if row["unique_id"]
+      # #   campaign = find_by_unique_id(row["unique_id"]) || new
+      # # else
+      #   campaign = Campaign.new
+      # # end
       debugger
-      row = convert(row)
-      debugger
-      campaign = find_by_unique_id(row["unique_id"]) || new
-      campaign.attributes = row.to_hash
-      debugger
-      campaign.save!
+      Campaign.create! row.to_hash
+      # campaign.save!
     end
   end
 
   def self.convert(row)
     new_row = row
-    row_time(5..12, new_row)
-    
-    new_row
+    new_row = row_to_i(5..12, new_row)
+    new_row = row_to_i(14..15, new_row)
+    new_row = row_to_i(17..21, new_row)
+    new_row = row_to_i(26..27, new_row)
+    new_row = row_to_i(33..33, new_row)
+    new_row = row_to_f(13..13, new_row)
+    new_row = row_to_f(16..16, new_row)
+    new_row = row_to_f(23..25, new_row)
+    new_row = row_to_f(28..29, new_row)
+    new_row = row_to_f(31..32, new_row)
+    new_row = row_to_f(34..36, new_row)
   end
 
-  def self.row_time(range, new_row)
+  def self.row_to_i(range, new_row)
     array = *range
     i = array[0]
     new_row[range].each do |column|
@@ -31,4 +42,16 @@ class Campaign < ActiveRecord::Base
     end
     new_row
   end
+
+  def self.row_to_f(range, new_row)
+    array = *range
+    i = array[0]
+    new_row[range].each do |column|
+      new_row[i] = column.to_f
+      i+=1
+    end
+    new_row
+  end
+
+
 end
