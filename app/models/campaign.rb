@@ -15,19 +15,16 @@ class Campaign < ActiveRecord::Base
     end
   end
 
-  def convert(row)
+  def self.convert(row)
     new_row = row
-    i = 5
     row_time(5..12, new_row)
-    # row[5..12].each do |column|
-    #   new_row[i] = column.to_i
-    #   i+=1
-    # end
+    
     new_row
   end
 
-  def row_time(range, new_row)
-    i = range[0]
+  def self.row_time(range, new_row)
+    array = *range
+    i = array[0]
     new_row[range].each do |column|
       new_row[i] = column.to_i
       i+=1
