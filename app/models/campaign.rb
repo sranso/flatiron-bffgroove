@@ -5,16 +5,10 @@ class Campaign < ActiveRecord::Base
 
   def self.import(file)
     CSV.foreach(file, headers: true) do |row|
-      # debugger
-      # row = convert(row)
-      # # if row["unique_id"]
-      # #   campaign = find_by_unique_id(row["unique_id"]) || new
-      # # else
-      #   campaign = Campaign.new
-      # # end
-      debugger
-      Campaign.create! row.to_hash
-      # campaign.save!
+      row = convert(row)
+      campaign = find_by_unique_id(row["unique_id"]) || new
+      campaign.attributes = row.to_hash
+      campaign.save!
     end
   end
 
@@ -36,6 +30,9 @@ class Campaign < ActiveRecord::Base
   def self.row_to_i(range, new_row)
     array = *range
     i = array[0]
+    debugger
+    # .each no longer working because row is now a csv object
+    #hard code column keys instead of range
     new_row[range].each do |column|
       new_row[i] = column.to_i
       i+=1
