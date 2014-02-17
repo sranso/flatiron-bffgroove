@@ -13,42 +13,22 @@ class Campaign < ActiveRecord::Base
   end
 
   def self.convert(row)
-    new_row = row
-    new_row = row_to_i(5..12, new_row)
-    new_row = row_to_i(14..15, new_row)
-    new_row = row_to_i(17..21, new_row)
-    new_row = row_to_i(26..27, new_row)
-    new_row = row_to_i(33..33, new_row)
-    new_row = row_to_f(13..13, new_row)
-    new_row = row_to_f(16..16, new_row)
-    new_row = row_to_f(23..25, new_row)
-    new_row = row_to_f(28..29, new_row)
-    new_row = row_to_f(31..32, new_row)
-    new_row = row_to_f(34..36, new_row)
-  end
+    integer_array = [:total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :total_opens, :unique_clicks, :total_clicks, :unsubscribes,:abuse_complaints, :times_liked_on_facebook, :folder_id, :visits, :new_visits,:transactions]
 
-  def self.row_to_i(range, new_row)
-    array = *range
-    i = array[0]
-    debugger
-    # .each no longer working because row is now a csv object
-    #hard code column keys instead of range
-    new_row[range].each do |column|
-      new_row[i] = column.to_i
-      i+=1
+    decimal_array = [:open_rate, :analytics_ROI, :campaign_cost, :revenue_created, :bounce_rate, :goal_conversion_rate, :per_visit_goal_value, :ecommerce_conversion_rate, :per_visit_value, :average_value]
+
+    integer_array.each do |key|
+      key = key.to_s
+      row[key] = row[key].to_i
+    end 
+
+    decimal_array.each do |key|
+      key = key.to_s
+      row[key] = row[key].to_f
     end
-    new_row
-  end
 
-  def self.row_to_f(range, new_row)
-    array = *range
-    i = array[0]
-    new_row[range].each do |column|
-      new_row[i] = column.to_f
-      i+=1
-    end
-    new_row
-  end
+    row
 
+  end
 
 end
