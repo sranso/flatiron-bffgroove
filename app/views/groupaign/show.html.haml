@@ -3,12 +3,21 @@
 
 %table 
   %tr
+    -@groupaign.attributes.each do |key,value|
+      %th=key.capitalize.gsub("_", " ")
+    %tr
+      - @groupaign.attributes.each do |key, value|
+        %td= value
+
+%table 
+  %tr
     -@groupaign.campaigns.first.attributes.each do |key,value|
       %th=key.capitalize.gsub("_", " ")
     - @groupaign.campaigns.each do |campaign|
       %tr
         - campaign.attributes.each do |key, value|
           %td= value
+
 
     
 
