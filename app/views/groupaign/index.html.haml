@@ -1,5 +1,5 @@
 %h1 These are the Groupaigns
 
 %ul
-  - @groupaigns.each do |groupaign|
-    %li= groupaign.title
+  - @groupaigns.each do |groupaign| 
+    %li=link_to groupaign.title, "#{groupaign.id}"
