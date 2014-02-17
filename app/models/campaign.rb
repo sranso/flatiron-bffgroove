@@ -1,6 +1,6 @@
 class Campaign < ActiveRecord::Base
-  attr_accessible :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :times_liked_on_facebook, :folder_id, :unique_id, :analytics_ROI, :campaign_cost, :revenue_created, :visits, :new_visits, :pages_visit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :groupaign_id
-  has_one :groupaign
+  attr_accessible :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :times_liked_on_facebook, :folder_id, :unique_id, :analytics_ROI, :campaign_cost, :revenue_created, :visits, :new_visits, :pages_visit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :group_campaign_id
+  has_one :group_campaign
 
   def self.import(file)
     CSV.foreach(file, headers: true) do |row|
@@ -35,9 +35,9 @@ class Campaign < ActiveRecord::Base
       else
         title = campaign.title 
       end
-      groupaign = Groupaign.find_or_create_by_title(title)
-      groupaign.campaigns << campaign
-      groupaign.save! 
+      group_campaign = GroupCampaign.find_or_create_by_title(title)
+      group_campaign.campaigns << campaign
+      group_campaign.save! 
     end
   end
 
