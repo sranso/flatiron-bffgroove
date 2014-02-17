@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140217155624) do
+ActiveRecord::Schema.define(:version => 20140217162534) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "title"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20140217155624) do
     t.decimal  "average_value"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+    t.integer  "groupaign_id"
   end
 
   create_table "groupaigns", :force => true do |t|
