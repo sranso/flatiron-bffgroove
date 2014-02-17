@@ -1,0 +1,2 @@
+module GroupaignHelper
+end

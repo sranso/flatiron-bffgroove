@@ -1,6 +1,9 @@
 BFFGroove::Application.routes.draw do
 
   root :to => 'campaign#index'
+  get '/groupaigns'=> 'groupaign#index'
+  get '/groupaigns/:id' => 'groupaign#show'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
