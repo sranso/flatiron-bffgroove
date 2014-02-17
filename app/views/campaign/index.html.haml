@@ -1,7 +1,10 @@
 %h1 This is the CSV
 
 %table
-  %tbody
-    - @campaigns.each do |campaign|
-      %tr
-        = campaign.
+  %tr
+    - @campaigns.first.attributes.each do |key, value|
+      %th= key.capitalize.gsub("_", " ")
+  - @campaigns.each do |campaign|
+    %tr
+      - campaign.attributes.each do |key, value|
+        %td= value
