@@ -1,1 +1,7 @@
 %h1 This is the CSV
+
+%table
+  %tbody
+    - @campaigns.each do |campaign|
+      %tr
+        = campaign.
