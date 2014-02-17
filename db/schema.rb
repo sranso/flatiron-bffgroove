@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140217193340) do
+ActiveRecord::Schema.define(:version => 20140217200922) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "title"
@@ -58,9 +58,26 @@ ActiveRecord::Schema.define(:version => 20140217193340) do
 
   create_table "groupaigns", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.integer  "total_recipients"
+    t.integer  "successful_deliveries"
+    t.integer  "soft_bounces"
+    t.integer  "hard_bounces"
+    t.integer  "total_bounces"
+    t.integer  "times_forwarded"
+    t.integer  "forwarded_opens"
+    t.integer  "unique_opens"
+    t.integer  "total_opens"
+    t.integer  "unique_clicks"
+    t.integer  "total_clicks"
+    t.integer  "unsubscribes"
+    t.integer  "abuse_complaints"
+    t.integer  "times_liked_on_facebook"
+    t.integer  "folder_id"
+    t.integer  "visits"
+    t.integer  "new_visits"
+    t.integer  "transactions"
   end
 
 end
