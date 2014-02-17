@@ -1,6 +1,7 @@
 BFFGroove::Application.routes.draw do
 
-  root :to => 'campaign#index'
+  root :to => 'campaign#home'
+  get '/campaigns' => 'campaign#index'
   get '/group_campaigns'=> 'group_campaign#index'
   get '/group_campaigns/:id' => 'group_campaign#show'
 
