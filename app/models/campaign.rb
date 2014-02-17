@@ -31,9 +31,12 @@ class Campaign < ActiveRecord::Base
 
   def self.group_campaigns
     self.all.each do |campaign|
-      title = /(.*) \(/.match(campaign["title"])[1]
+      if /(.*) \(/.match(campaign["title"])
+        title = /(.*) \(/.match(campaign["title"])[1]
+      else
+        title = campaign.title 
+      end
       groupaign = Groupaign.find_or_create_by_title(title)
-      debugger
       groupaign.campaigns << campaign
       groupaign.save! 
     end
