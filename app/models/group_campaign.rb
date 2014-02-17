@@ -1,16 +1,18 @@
-class Groupaign < ActiveRecord::Base
+class GroupCampaign < ActiveRecord::Base
   attr_accessible :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :times_liked_on_facebook, :folder_id, :unique_id, :analytics_ROI, :campaign_cost, :revenue_created, :visits, :new_visits, :pages_visit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :campaigns
   has_many :campaigns
 
   def self.aggregate
-    self.all.each do |groupaign|
-      Groupaign.columns_hash.each do |key,val| 
+    self.all.each do |group_campaign|
+      GroupCampaign.columns_hash.each do |key,val|
+        # debugger
         if val.type == :integer && key != "id"
-          groupaign[key] = groupaign.campaigns.sum(key)
-          groupaign.calculate_open_rate
-          groupaign.save!
+          group_campaign[key] = group_campaign.campaigns.sum(key)
+          group_campaign.save!
         end
       end
+      group_campaign.calculate_open_rate
+      group_campaign.save!
     end
   end
 
@@ -19,11 +21,11 @@ class Groupaign < ActiveRecord::Base
   end 
 
   # def self.reassign_nils
-  #   empty = Groupaign.find_by_title("")
+  #   empty = GroupCampaign.find_by_title("")
   #   empty.campaigns.each do |campaign|
   #     Campaign.find_by_subject(campaign.subject)
   #   end
   # end
-  #SELECT SUM("campaigns"."total_recipients") AS sum_id FROM "campaigns" WHERE "campaigns"."groupaign_id" = 402
+  #SELECT SUM("campaigns"."total_recipients") AS sum_id FROM "campaigns" WHERE "campaigns"."group_campaign_id" = 402
 
 end
