@@ -4,16 +4,13 @@ class Groupaign < ActiveRecord::Base
 
   def self.aggregate
     self.all.each do |groupaign|
-      groupaign.columns_hash.each do |key, value|
-        Campaign.columns_hash.each { |k,v| arr << v.type == :integer }
+      Groupaign.columns_hash.each do |key,val| 
+        if val.type == :integer && val != "id"
+          groupaign[key] = groupaign.campaigns.sum(key)
+          groupaign.save!
+        end
       end
-      groupaign.total_recipients = groupaign.campaigns.sum("total_recipients")
-      groupaign.save!
     end
-  end
-
-  def method_name
-    
   end
 
   # def self.reassign_nils
@@ -22,5 +19,6 @@ class Groupaign < ActiveRecord::Base
   #     Campaign.find_by_subject(campaign.subject)
   #   end
   # end
+  #SELECT SUM("campaigns"."total_recipients") AS sum_id FROM "campaigns" WHERE "campaigns"."groupaign_id" = 402
 
 end
