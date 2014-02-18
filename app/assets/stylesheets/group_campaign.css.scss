@@ -6,14 +6,15 @@
   display: none;
 }
 
+.display_table {
+  display: table;
+}
+
 .table-wrapper {
-  // height: auto;
-  // max-height: 600px;
-  // overflow: auto;
   position: relative;
 }
 
-.table-wrapper table{
+.table-wrapper table {
   width: 100%;
 }
 
@@ -24,14 +25,9 @@
   margin-top: 20px;
 }
 
-th .text{
+th .text {
   top: -20px;
   position: absolute;   
   width: auto;
   z-index: 2;
-  /*top:-20px;*/
-}
-
-.display_table{
-  display: table;
 }
