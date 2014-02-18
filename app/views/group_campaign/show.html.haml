@@ -11,6 +11,8 @@
       - @group_campaign.attributes.each do |key, value|
         %td= value
 
+=button_to 'Campaigns', "campaigns",{method: "get"}
+
 %table 
   %tr
     -@group_campaign.campaigns.first.attributes.each do |key,value|
