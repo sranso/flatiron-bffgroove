@@ -1,5 +1,5 @@
 class CampaignController < ApplicationController
   def index
-    @campaigns = Campaign.all  
+    @campaigns = Campaign.first(200)  
   end
 end
