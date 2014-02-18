@@ -20,6 +20,33 @@ class GroupCampaign < ActiveRecord::Base
     self[:open_rate] = (self[:unique_opens].to_f/self[:successful_deliveries].to_f)*100.round(2)
   end 
 
+  def self.search_engine(search)
+    title_results = []
+    self.all.each do |group_campaign|
+      title_results << goup_campaign if group_campaign.title.include?(search) 
+    end 
+    title_results
+  end 
+
+  def search(word)
+        @song_results = []
+        @artist_results = []
+        @genre_results = []
+        word.downcase!
+        Song.all.each do |song|
+         @song_results << song if song.name.downcase.include?(word)
+         @song_results << song if song.artist.name.downcase.include?(word)
+         @song_results << song if song.genre.name.downcase.include?(word)
+        end
+        Artist.all.each do |artist|
+         @artist_results << artist if artist.name.downcase.include?(word)
+        end
+        Genre.all.each do |genre|
+         @genre_results << genre if genre.name.downcase.include?(word)
+        end
+      end
+    end
+
   # def self.reassign_nils
   #   empty = GroupCampaign.find_by_title("")
   #   empty.campaigns.each do |campaign|
