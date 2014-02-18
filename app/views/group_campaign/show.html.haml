@@ -13,7 +13,7 @@
 
 .show_button=button_to 'Show Campaigns', {method: "get"}
 
-%table 
+%table.campaigns_table
   %tr
     -@group_campaign.campaigns.first.attributes.each do |key,value|
       %th=key.capitalize.gsub("_", " ")
