@@ -1,14 +1,15 @@
 %h1 This is the CSV
 
-%table
-  %tr
-    - @campaigns.first.attributes.each do |key, value|
-      %th= key.capitalize.gsub("_", " ")
-  - @campaigns.each do |campaign|
-    %div
-      %tr
-        - campaign.attributes.each do |key, value|
-          - if key == "title"
-            %td=link_to value, "group_campaigns/#{campaign.group_campaign_id}"
-          - else
-            %td=value
+.table-wrapper
+  %table
+    %tr
+      - @campaigns.first.attributes.each do |key, value|
+        %th= key.capitalize.gsub("_", " ")
+    - @campaigns.each do |campaign|
+      %div
+        %tr
+          - campaign.attributes.each do |key, value|
+            - if key == "title"
+              %td=link_to value, "group_campaigns/#{campaign.group_campaign_id}"
+            - else
+              %td=value
