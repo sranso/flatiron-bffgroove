@@ -11,11 +11,12 @@
 
 %a.button.show_button{:method => "get"} Show Campaigns
 .table-wrapper
-  %table.campaigns_table
-    %tr
-      -@group_campaign.campaigns.first.attributes.each do |key,value|
-        %th=key.capitalize.gsub("_", " ")
-      - @group_campaign.campaigns.each do |campaign|
-        %tr
-          - campaign.attributes.each do |key, value|
-            %td= value
+  .table-scroll
+    %table.campaigns_table
+      %tr
+        -@group_campaign.campaigns.first.attributes.each do |key,value|
+          %th=key.capitalize.gsub("_", " ")
+        - @group_campaign.campaigns.each do |campaign|
+          %tr
+            - campaign.attributes.each do |key, value|
+              %td.text= value
