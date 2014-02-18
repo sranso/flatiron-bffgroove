@@ -1,6 +1,7 @@
 %h1 These are the Group Campaigns
-=button_to 'Home', "/",{method: "get"}
-=button_to 'Campaigns', "campaigns",{method: "get"}
+
+%a.button{:href => '/', :method => "get"} Home
+%a.button{:href => '/campaigns', :method => "get"} Campaigns
 
 %ul
   - @group_campaigns.each do |group_campaign| 

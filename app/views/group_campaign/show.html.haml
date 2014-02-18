@@ -1,7 +1,8 @@
 %h1= @group_campaign.title
-=button_to 'Home', "/",{method: "get"}
-=button_to 'Group Campaigns', "group_campaigns",{method: "get"}
-=button_to 'Campaigns', "campaigns",{method: "get"}
+
+%a.button{:href => '/', :method => "get"} Home
+%a.button{:href => '/group_campaigns', :method => "get"} Group Campaigns
+%a.button{:href => '/campaigns', :method => "get"} Campaigns
 
 %table 
   %tr
@@ -11,7 +12,7 @@
       - @group_campaign.attributes.each do |key, value|
         %td= value
 
-%a.button.show_button{:href => '/', :method => "get"} Show Campaigns
+%a.button.show_button{:method => "get"} Show Campaigns
 
 %table.campaigns_table
   %tr
