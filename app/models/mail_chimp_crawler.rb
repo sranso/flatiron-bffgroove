@@ -7,9 +7,9 @@ class MailChimpCrawler
     page = @agent.get('https://login.mailchimp.com/') do |login_page|
       form = login_page.form_with(:name => nil)
       username_field = form.field_with(:name => "username")
-      username_field.value = "blake41"
+      username_field.value = ENV["THE_USERNAME"]
       password_field = form.field_with(:name => "password")
-      password_field.value = "flatironschool1"
+      password_field.value = ENV["THE_PASSWORD"]
       @agent.page.form.submit
       logged_in = @agent.page.form.submit
     end
