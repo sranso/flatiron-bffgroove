@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BFFGroove</title>
+  <title>Petflow</title>
+  <link rel="stylesheet" type="text/css" href="/foundation-5.1.1/css/foundation.min.css">
+  <link rel="stylesheet" type="text/css" href="/foundation-5.1.1/css/normalize.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="/actions.js"></script>
+  <script src="/foundation-5.1.1/js/foundation.min.js"></script>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/">Petflow Data</a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+  </ul>
 
-<%= yield %>
+  <section class="top-bar-section">
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="/campaigns">Campaigns</a></li>
+    </ul>
+     <ul class="left">
+      <li><a href="/group_campaigns">Group Campaigns</a></li>
+    </ul>
+  </section>
+</nav>
+  <%= yield %>
 
 </body>
 </html>
