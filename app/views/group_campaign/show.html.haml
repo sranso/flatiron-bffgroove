@@ -1,5 +1,7 @@
-%h1 
-  = @group_campaign.title
+%h1= @group_campaign.title
+=button_to 'Home', "/",{method: "get"}
+=button_to 'Group Campaigns', "group_campaigns",{method: "get"}
+=button_to 'Campaigns', "campaigns",{method: "get"}
 
 %table 
   %tr
