@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140217224356) do
+ActiveRecord::Schema.define(:version => 20140218194251) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "title"
@@ -37,12 +37,12 @@ ActiveRecord::Schema.define(:version => 20140217224356) do
     t.integer  "times_liked_on_facebook"
     t.integer  "folder_id"
     t.string   "unique_id"
-    t.decimal  "analytics_ROI"
+    t.decimal  "analytics_roi"
     t.decimal  "campaign_cost"
     t.decimal  "revenue_created"
     t.integer  "visits"
     t.integer  "new_visits"
-    t.float    "pages_visit"
+    t.float    "pagesvisit"
     t.decimal  "bounce_rate"
     t.time     "time_on_site"
     t.decimal  "goal_conversion_rate"
@@ -80,12 +80,12 @@ ActiveRecord::Schema.define(:version => 20140217224356) do
     t.integer  "times_liked_on_facebook"
     t.integer  "folder_id"
     t.string   "unique_id"
-    t.decimal  "analytics_ROI"
+    t.decimal  "analytics_roi"
     t.decimal  "campaign_cost"
     t.decimal  "revenue_created"
     t.integer  "visits"
     t.integer  "new_visits"
-    t.float    "pages_visit"
+    t.float    "pagesvisit"
     t.decimal  "bounce_rate"
     t.time     "time_on_site"
     t.decimal  "goal_conversion_rate"
