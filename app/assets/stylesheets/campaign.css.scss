@@ -1,3 +1,25 @@
 table, th, td {
   border: 1px solid black;
 }
+
+.table-wrapper {
+  position: relative;
+}
+
+.table-wrapper table {
+  width: 100%;
+}
+
+.table-scroll {
+  height: auto;
+  max-height: 600px;
+  overflow: auto;
+  margin-top: 20px;
+}
+
+th .text {
+  top: -20px;
+  position: absolute;   
+  width: auto;
+  z-index: 2;
+}
