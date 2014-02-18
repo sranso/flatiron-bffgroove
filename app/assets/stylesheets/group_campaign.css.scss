@@ -1,3 +1,37 @@
 // Place all the styles related to the group_campaign controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.campaigns_table{
+  display: none;
+}
+
+.table-wrapper {
+  // height: auto;
+  // max-height: 600px;
+  // overflow: auto;
+  position: relative;
+}
+
+.table-wrapper table{
+  width: 100%;
+}
+
+.table-scroll {
+  height: auto;
+  max-height: 600px;
+  overflow: auto;
+  margin-top: 20px;
+}
+
+th .text{
+  top: -20px;
+  position: absolute;   
+  width: auto;
+  z-index: 2;
+  /*top:-20px;*/
+}
+
+.display_table{
+  display: table;
+}

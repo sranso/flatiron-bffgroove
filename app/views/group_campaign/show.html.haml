@@ -1,19 +1,22 @@
-%h1 
-  = @group_campaign.title
+%h1= @group_campaign.title
 
-%table 
-  %tr
-    -@group_campaign.attributes.each do |key,value|
-      %th=key.capitalize.gsub("_", " ")
+.table-wrapper
+  %table 
     %tr
-      - @group_campaign.attributes.each do |key, value|
-        %td= value
-
-%table 
-  %tr
-    -@group_campaign.campaigns.first.attributes.each do |key,value|
-      %th=key.capitalize.gsub("_", " ")
-    - @group_campaign.campaigns.each do |campaign|
+      -@group_campaign.attributes.each do |key,value|
+        %th=key.capitalize.gsub("_", " ")
       %tr
-        - campaign.attributes.each do |key, value|
+        - @group_campaign.attributes.each do |key, value|
           %td= value
+
+%a.button.show_button{:method => "get"} Show Campaigns
+.table-wrapper
+  .table-scroll
+    %table.campaigns_table
+      %tr
+        -@group_campaign.campaigns.first.attributes.each do |key,value|
+          %th=key.capitalize.gsub("_", " ")
+        - @group_campaign.campaigns.each do |campaign|
+          %tr
+            - campaign.attributes.each do |key, value|
+              %td.text= value
