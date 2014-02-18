@@ -3,10 +3,8 @@ $(document).ready(function() {
     e.preventDefault();
     $(".campaigns_table").toggleClass("display_table");
     if ($(".campaigns_table").hasClass("display_table")) {
-      // $(this).html('<input type="submit" value="Hide Campaigns"/>');
       $(this).text("Hide Campaigns");
     } else {
-      // $(this).html('<input type="submit" value="Show Campaigns"/>');
       $(this).text("Show Campaigns");
     }
   });
