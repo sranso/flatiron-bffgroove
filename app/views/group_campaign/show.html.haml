@@ -11,7 +11,7 @@
       - @group_campaign.attributes.each do |key, value|
         %td= value
 
-.show_button=button_to 'Show Campaigns', {method: "get"}
+%a.button.show_button{:href => '/', :method => "get"} Show Campaigns
 
 %table.campaigns_table
   %tr
