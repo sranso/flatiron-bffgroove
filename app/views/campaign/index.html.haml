@@ -1,10 +1,17 @@
 %h1 This is the CSV
+=button_to 'Home', "/",{method: "get"}
+=button_to 'Group Campaigns', "group_campaigns",{method: "get"}
+
 
 %table
   %tr
     - @campaigns.first.attributes.each do |key, value|
       %th= key.capitalize.gsub("_", " ")
   - @campaigns.each do |campaign|
-    %tr
-      - campaign.attributes.each do |key, value|
-        %td= value
+    %div
+      %tr
+        - campaign.attributes.each do |key, value|
+          - if key == "title"
+            %td=link_to value, "group_campaigns/#{campaign.group_campaign_id}"
+          - else
+            %td=value
