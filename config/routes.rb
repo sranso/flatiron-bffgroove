@@ -1,5 +1,7 @@
 BFFGroove::Application.routes.draw do
 
+  devise_for :users
+
   root :to => 'campaign#home'
   get '/campaigns' => 'campaign#index'
   get '/group_campaigns'=> 'group_campaign#index'
