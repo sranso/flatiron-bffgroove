@@ -6,6 +6,18 @@
   display: none;
 }
 
+.table-wrapper {
+  height: auto;
+  max-height: 600px;
+  overflow: auto;
+}
+
+th {
+  position: absolute;   
+  width: auto;
+  /*top:-20px;*/
+}
+
 .display_table{
   display: table;
 }
