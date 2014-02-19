@@ -1,5 +1,4 @@
-%ul
-  %form{ :action => "/group_campaigns/search", :method =>"GET" }
-    %fieldset
-      %input{:type =>"text", :name =>"search"}
-      %button{:type =>"submit"}
+%form{:action => "/group_campaigns/search", :method =>"GET"}
+  %fieldset
+    %input{:type =>"text", :name =>"search"}
+    %a.button{:type =>"submit"} Submit
