@@ -1,7 +1,15 @@
 BFFGroove::Application.routes.draw do
 
-  devise_for :users
+  # devise
+  devise_for :users, :skip => [:sessions, :registerable]
+  as :user do
+    get '/users/sign_in' => 'devise/sessions#new', :as => :new_user_session
+    post '/users/sign_in' => 'devise/sessions#create', :as => :user_session
+    delete '/users/sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+  get '/users/sign_up' => 'campaign#home'
 
+  # other routes
   root :to => 'campaign#home'
   get '/campaigns' => 'campaign#index'
   get '/group_campaigns'=> 'group_campaign#index'
