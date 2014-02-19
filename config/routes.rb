@@ -4,6 +4,7 @@ BFFGroove::Application.routes.draw do
   get '/campaigns' => 'campaign#index'
   get '/group_campaigns'=> 'group_campaign#index'
   get '/group_campaigns/:id' => 'group_campaign#show'
+  post '/group_campaigns/search' => 'group_campaign#search'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
