@@ -10,7 +10,7 @@ class GroupCampaignController < ApplicationController
   
 
   def search
-    @group_campaigns = GroupCampaign.search_engine(params[:search])
+    @search = params[:search]
   end  
 
 
