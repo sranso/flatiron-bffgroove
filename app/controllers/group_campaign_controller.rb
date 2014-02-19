@@ -16,7 +16,7 @@ class GroupCampaignController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @group_campaign }
+      format.json { render json: @group_campaign, :methods => :these_campaigns }
     end
   end 
 end
