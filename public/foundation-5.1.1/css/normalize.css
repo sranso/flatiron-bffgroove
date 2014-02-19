@@ -8,6 +8,10 @@
  * Correct `block` display not defined in IE 8/9.
  */
 
+.large-8.small-9.columns input {
+  height: 1.8rem;
+}
+
 article,
 aside,
 details,
@@ -22,7 +26,6 @@ section,
 summary {
     display: block;
 }
-
 /**
  * Correct `inline-block` display not defined in IE 8/9.
  */
