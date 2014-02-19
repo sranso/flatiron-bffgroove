@@ -9,9 +9,11 @@ class GroupCampaignController < ApplicationController
     @group_campaign = GroupCampaign.find(params[:id])
   end
   
-
   def search
-    @group_campaigns = GroupCampaign.search_engine(params[:search])
+    @search = GroupCampaign.search do 
+      fulltext params[:search]
+    end
+    @group_campaigns = @search.results
   end  
 
 

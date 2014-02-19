@@ -1,9 +1,5 @@
-%ul{:class=>"right"}
-  %form{ :action => "group_campaigns/search", :method =>"POST" }
+%ul
+  %form{ :action => "/group_campaigns/search", :method =>"GET" }
     %fieldset
-      %li 
-        %label{:for =>"search"} Search:
-      %li
-        %input{:type =>"text", :name =>"search", :class =>"text"}
-      %li  
-        %button{:type =>"submit", :value =>"Search", :class =>"button"}
+      %input{:type =>"text", :name =>"search"}
+      %button{:type =>"submit"}
