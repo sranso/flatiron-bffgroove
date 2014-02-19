@@ -20,16 +20,23 @@
     </ul>
 
     <section class="top-bar-section">
-
       <!-- Left Nav Section -->
       <ul class="left">
         <li><a href="/campaigns">Campaigns</a></li>
-      </ul>
-       <ul class="left">
         <li><a href="/group_campaigns">Group Campaigns</a></li>
       </ul>
+      <ul class="has-form">
+        <li>
+          <div>
+            <%= render 'group_campaign/form' %>
+          </div>
+        </li>
+      </ul>
+      
       <!-- Right Nav Section --> 
+     
       <ul class="right">
+        
         <% if user_signed_in? %>
           <li class="active"><a href="/users/sign_out" data-method="DELETE">Sign Out</a></li>
         <% else %>

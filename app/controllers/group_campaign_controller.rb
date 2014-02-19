@@ -7,5 +7,14 @@ class GroupCampaignController < ApplicationController
 
   def show
     @group_campaign = GroupCampaign.find(params[:id])
-  end 
+  end
+  
+  def search
+    @search = GroupCampaign.search do 
+      fulltext params[:search]
+    end
+    @group_campaigns = @search.results
+  end  
+
+
 end
