@@ -34,6 +34,8 @@ gem 'jquery-rails'
 gem 'mechanize'
 gem 'whenever', :require => false
 gem 'figaro'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
