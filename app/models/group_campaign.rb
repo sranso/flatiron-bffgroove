@@ -5,7 +5,6 @@ class GroupCampaign < ActiveRecord::Base
   def self.aggregate
     self.all.each do |group_campaign|
       GroupCampaign.columns_hash.each do |key,val|
-        # debugger
         if val.type == :integer && key != "id"
           group_campaign[key] = group_campaign.campaigns.sum(key)
           group_campaign.save!
