@@ -6,5 +6,12 @@ class GroupCampaignController < ApplicationController
 
   def show
     @group_campaign = GroupCampaign.find(params[:id])
-  end 
+  end
+  
+
+  def search
+    @group_campaigns = GroupCampaign.search_engine(params[:search])
+  end  
+
+
 end
