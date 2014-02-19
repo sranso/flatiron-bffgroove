@@ -1,6 +1,9 @@
-= form_for(GroupCampaign.search)
-  .field 
-    = f.label :search 
-    = f.text_field :search
-  .actions 
-    = f.submit 'Search'
+%ul{:class=>"right"}
+  %form{ :action => "group_campaign/search", :method =>"POST" }
+    %fieldset
+      %li 
+        %label{:for =>"search"} Search:
+      %li
+        %input{:type =>"text", :name =>"search", :class =>"text"}
+      %li  
+        %button{:type =>"submit", :value =>"Search", :class =>"button"}
