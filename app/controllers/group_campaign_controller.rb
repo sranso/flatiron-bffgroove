@@ -6,7 +6,7 @@ class GroupCampaignController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @group_campaigns }
+      format.json { render "group_campaign/index.json.rabl" }
     end
   end 
 
@@ -15,7 +15,7 @@ class GroupCampaignController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @group_campaign, :methods => :campaigns }
+      format.json { render "group_campaign/show.json.rabl" }
     end
   end
   
