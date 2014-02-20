@@ -29,7 +29,7 @@ $(document).ready(function() {
   function makeCampaignsTable (div, tableData, keys){
     $(div).handsontable({
         data: tableData,
-        rowHeaders: tableData[0].title,
+        // rowHeaders: tableData.title,
         colHeaders: keys,
         fixedRowsTop: 1,
         contextMenu: true,
@@ -42,17 +42,22 @@ $(document).ready(function() {
     success: function(data) {
       var dataResponse = data;
       var campaigns;
-      var keys = [];
+      var keysGroupCampaign = [];
+      var keysCampaign = [];
       campaigns = dataResponse.campaigns;
-      console.log(campaigns);
       delete dataResponse.campaigns;
 
       for (var k in dataResponse) {
         kNew = replaceAll("_", " ", k).toUpperCase();
-        keys.push(kNew);
+        keysGroupCampaign.push(kNew);
       }
-      makeGroupedTable(".tableGroupCampaign", dataResponse, keys);
-      makeCampaignsTable(".tableGroupCampaigns", campaigns, keys);
+      for (var k in campaigns[0]) {
+        kNew = replaceAll("_", " ", k).toUpperCase();
+        keysCampaign.push(kNew);
+      }
+      makeGroupedTable(".tableGroupCampaign", dataResponse, keysGroupCampaign);
+      makeCampaignsTable(".tableGroupCampaigns", campaigns, keysCampaign);
+      console.log(campaigns);
     },
     error: function(data) {
       console.log("Error with the fetch");
