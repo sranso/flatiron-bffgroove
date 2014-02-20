@@ -21,7 +21,6 @@ $(document).ready(function() {
         data: tableData,
         rowHeaders: tableData.title,
         colHeaders: keys,
-        fixedRowsTop: 1,
         readOnly: true,
         columnSorting: true,
         persistentState: true,
@@ -34,7 +33,6 @@ $(document).ready(function() {
     $(div).handsontable({
         data: tableData,
         colHeaders: keys,
-        fixedRowsTop: 1,
         readOnly: true,
         columnSorting: true,
         persistentState: true,
