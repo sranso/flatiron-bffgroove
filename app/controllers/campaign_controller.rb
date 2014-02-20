@@ -3,5 +3,10 @@ class CampaignController < ApplicationController
 
   def index
     @campaigns = Campaign.order(:id).first(200)
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @campaigns }
+    end
   end
 end

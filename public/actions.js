@@ -1,3 +1,5 @@
+var dataResponse;
+
 $(document).ready(function() {
   $(".show_button").on("click", function(e) {
     e.preventDefault();
@@ -8,8 +10,29 @@ $(document).ready(function() {
       $(this).text("Show Campaigns");
     }
   });
-  // $("table").handsontable({
-  //   rowHeaders: true,
-  //   fixedRowsTop: 1
-  // });
+
+  var group_campaign_id = $("input.group_campaign_id").val();
+
+  $.ajax('/group_campaigns/' + group_campaign_id + '.json', {
+    type: 'GET',
+    success: function(data) {
+      dataResponse = data;
+      console.log(dataResponse);
+      var keys = [];
+      for (var k in dataResponse) {
+        keys.push(k);
+      }
+      $(".tableJs").handsontable({
+        data: dataResponse,
+        rowHeaders: true,
+        colHeaders: keys,
+        fixedRowsTop: 1,
+        contextMenu: true
+      });
+    },
+    error: function(data) {
+      console.log("Error with the fetch");
+    }
+  });
+
 });
