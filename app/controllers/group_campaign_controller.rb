@@ -8,7 +8,6 @@ class GroupCampaignController < ApplicationController
       format.html
       format.json { render json: @group_campaigns }
     end
-
   end 
 
   def show
