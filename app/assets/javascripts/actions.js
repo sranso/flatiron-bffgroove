@@ -38,8 +38,8 @@ $(document).ready(function() {
         readOnly: true,
         columnSorting: true,
         persistentState: true,
-        manualColumnMove: true,
-        manualColumnResize: true
+        manualColumnMove: true
+        // manualColumnResize: true
       });
   }
 
@@ -107,6 +107,15 @@ $(document).ready(function() {
 
       makeCampaignsTable(".tableCampaigns", dataResponse, keysCampaigns);
       makeSortable(".tableCampaigns");
+
+      var ht = $(".tableCampaigns").data('handsontable');
+
+      setInterval(function () {
+        var str = '';
+        str += 'offsetRow: ' + ht.view.getSetting('offsetRow') + '\n';
+        str += 'offsetColumn: ' + ht.view.wt.getSetting('offsetColumn');
+        $('#positions').html(str);
+      }, 100);
     },
     error: function(data) {
       console.log("Error with the fetch");

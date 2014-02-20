@@ -9,10 +9,10 @@ table, th, td {
   width: 100%;
 }
 
-.table-scroll {
-  height: auto;
-  max-height: 600px;
-  overflow: auto;
+.tableCampaigns {
+  height: 80%;
+  overflow: scroll;
+  width: inherit;
   margin-top: 20px;
 }
 
