@@ -11,7 +11,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav class="top-bar" data-topbar>
+  <nav class="top-bar custom-bar" data-topbar>
     <ul class="title-area">
       <li class="name">
         <h1><a href="/">Petflow Data</a></h1>
@@ -24,14 +24,7 @@
       <ul class="left">
         <li><a href="/campaigns">Campaigns</a></li>
         <li><a href="/group_campaigns">Group Campaigns</a></li>
-      </ul>
-      <!-- <li class="divider"></li> -->
-      <ul class="has-form">
-        <li>
-          <div>
-            <%= render 'group_campaign/form' %>
-          </div>
-        </li>
+        <%= render 'group_campaign/form'%>
       </ul>
       
       <!-- Right Nav Section --> 
@@ -39,9 +32,9 @@
       <ul class="right">
         
         <% if user_signed_in? %>
-          <li class="active"><a href="/users/sign_out" data-method="DELETE">Sign Out</a></li>
+          <li class="active "><a href="/users/sign_out" data-method="DELETE" class="custom-bar">Sign Out</a></li>
         <% else %>
-          <li class="active"><a href="/users/sign_in">Sign In</a></li>
+          <li class="active"><a href="/users/sign_in" class="custom-bar">Sign In</a></li>
         <% end %>
       </ul>
     </section>

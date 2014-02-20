@@ -1,6 +1,7 @@
-%form{:action => "/group_campaigns/search", :method =>"GET"}
-  %fieldset
-    %li
-      %input{:type =>"text", :name =>"search"}
-    %li
-      %button{:type =>"submit"} Submit
+%li{:class => "has-form"}
+  %form{:action => "/group_campaigns/search", :method =>"GET"}
+    %div{:class => "row-collapse"}
+      %div{:class => "small-8 columns"}
+        %input{:type =>"text", :name =>"search"}
+      %div{:class => "small-4 columns"}
+        %button{:type =>"submit"} Submit
