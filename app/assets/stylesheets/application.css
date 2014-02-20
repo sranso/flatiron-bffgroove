@@ -11,3 +11,7 @@
  *= require_self
  *= require_tree .
  */
+
+.custom-bar{
+  min-height: 53px;
+}
