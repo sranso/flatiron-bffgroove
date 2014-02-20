@@ -1,23 +1,2 @@
 %h1= @group_campaign.title
-
-.table-wrapper
-  .table-scroll
-    %table 
-      %tr
-        -@group_campaign.attributes.each do |key,value|
-          %th=key.capitalize.gsub("_", " ")
-        %tr
-          - @group_campaign.attributes.each do |key, value|
-            %td= value
-
-%a.button.show_button{:method => "get"} Show Campaigns
-.table-wrapper
-  .table-scroll
-    %table.campaigns_table
-      %tr
-        -@group_campaign.campaigns.first.attributes.each do |key,value|
-          %th=key.capitalize.gsub("_", " ")
-        - @group_campaign.campaigns.each do |campaign|
-          %tr
-            - campaign.attributes.each do |key, value|
-              %td.text= value
+%input.group_campaign_id{:type => "hidden", :name => "group_campaign_id", :value => "#{@group_campaign.id}"}
