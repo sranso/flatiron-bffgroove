@@ -1,12 +1,11 @@
 $(document).ready(function() {
-  $(".tableGCCampaigns").addClass("hide_table");
+  // $(".tableGCCampaigns").addClass("hide_table");
   $(".show_button").on("click", function(e) {
-    e.preventDefault();
     $(".tableGCCampaigns").toggleClass("hide_table");
     if ($(".tableGCCampaigns").hasClass("hide_table")) {
-      $(this).text("Hide Campaigns");
-    } else {
       $(this).text("Show Campaigns");
+    } else {
+      $(this).text("Hide Campaigns");
     }
   });
 
