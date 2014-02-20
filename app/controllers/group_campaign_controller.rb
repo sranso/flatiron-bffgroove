@@ -17,5 +17,15 @@ class GroupCampaignController < ApplicationController
       format.html
       format.json { render json: @group_campaign, :methods => :campaigns }
     end
-  end 
+  end
+  
+  def search
+    @search = GroupCampaign.search do 
+      fulltext params[:search]
+    end
+    @group_campaigns = @search.results
+  end  
+
+
+>>>>>>> dc38ed873f1c934c6309c768585100d63920ecec
 end
