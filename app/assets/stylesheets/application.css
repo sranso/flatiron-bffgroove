@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
  */
+
+/*.top-bar{
+  min-height: 53px;
+}*/
+
+.custom-bar{
+  min-height: 53px;
+}
