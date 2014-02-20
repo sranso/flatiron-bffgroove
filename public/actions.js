@@ -24,7 +24,7 @@ $(document).ready(function() {
       }
       $(".tableJs").handsontable({
         data: dataResponse,
-        rowHeaders: true,
+        rowHeaders: dataResponse.title,
         colHeaders: keys,
         fixedRowsTop: 1,
         contextMenu: true
