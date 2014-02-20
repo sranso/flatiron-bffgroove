@@ -34,6 +34,9 @@ gem 'jquery-rails'
 gem 'mechanize'
 gem 'whenever', :require => false
 gem 'figaro'
+
+gem 'rabl'
+gem 'oj'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
