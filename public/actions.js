@@ -8,4 +8,8 @@ $(document).ready(function() {
       $(this).text("Show Campaigns");
     }
   });
+  // $("table").handsontable({
+  //   rowHeaders: true,
+  //   fixedRowsTop: 1
+  // });
 });
