@@ -9,5 +9,19 @@ $(document).ready(function() {
     }
   });
 
+  var group_campaign_id = $("input.group_campaign_id").val();
+  var selectionGroupCampaign;
+
+  $.ajax('/group_campaigns/' + group_campaign_id + '.json', {
+    type: 'GET',
+    success: function(data) {
+      selectionGroupCampaign = data;
+    },
+    error: function(data) {
+      console.log("Error with the fetch");
+    }
+  });
+
+
   
 });
