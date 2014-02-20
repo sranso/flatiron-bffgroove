@@ -15,8 +15,8 @@ $(document).ready(function() {
     return str.replace(new RegExp(find, 'g'), replace);
   }
 
-  function makeTable (tableData, keys){
-    $(".tableJs").handsontable({
+  function makeGroupedTable (div, tableData, keys){
+    $(div).handsontable({
         data: tableData,
         rowHeaders: tableData.title,
         colHeaders: keys,
@@ -25,6 +25,18 @@ $(document).ready(function() {
         readOnly: true
       });
   }
+
+  function makeCampaignsTable (div, tableData, keys){
+    $(div).handsontable({
+        data: tableData,
+        rowHeaders: tableData[0].title,
+        colHeaders: keys,
+        fixedRowsTop: 1,
+        contextMenu: true,
+        readOnly: true
+      });
+  }
+
   $.ajax('/group_campaigns/' + group_campaign_id + '.json', {
     type: 'GET',
     success: function(data) {
@@ -32,13 +44,15 @@ $(document).ready(function() {
       var campaigns;
       var keys = [];
       campaigns = dataResponse.campaigns;
+      console.log(campaigns);
       delete dataResponse.campaigns;
 
       for (var k in dataResponse) {
         kNew = replaceAll("_", " ", k).toUpperCase();
         keys.push(kNew);
       }
-      makeTable(dataResponse, keys);
+      makeGroupedTable(".tableGroupCampaign", dataResponse, keys);
+      makeCampaignsTable(".tableGroupCampaigns", campaigns, keys);
     },
     error: function(data) {
       console.log("Error with the fetch");
