@@ -95,7 +95,6 @@ $(document).ready(function() {
   $.ajax('/campaigns.json', {
     type: 'GET',
     success: function(data) {
-      console.log(data);
       data1 = data;
       var dataResponse = data;
       var keysCampaigns = [];
@@ -108,14 +107,6 @@ $(document).ready(function() {
       makeCampaignsTable(".tableCampaigns", dataResponse, keysCampaigns);
       makeSortable(".tableCampaigns");
 
-      var ht = $(".tableCampaigns").data('handsontable');
-
-      setInterval(function () {
-        var str = '';
-        str += 'offsetRow: ' + ht.view.getSetting('offsetRow') + '\n';
-        str += 'offsetColumn: ' + ht.view.wt.getSetting('offsetColumn');
-        $('#positions').html(str);
-      }, 100);
     },
     error: function(data) {
       console.log("Error with the fetch");
