@@ -26,6 +26,4 @@ class GroupCampaignController < ApplicationController
     @group_campaigns = @search.results
   end  
 
-
->>>>>>> dc38ed873f1c934c6309c768585100d63920ecec
 end
