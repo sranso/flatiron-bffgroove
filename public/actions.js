@@ -22,19 +22,47 @@ $(document).ready(function() {
         colHeaders: keys,
         fixedRowsTop: 1,
         contextMenu: true,
-        readOnly: true
+        readOnly: true,
+        columnSorting: true,
+        persistentState: true,
+        manualColumnMove: true,
+        manualColumnResize: true
       });
   }
 
   function makeCampaignsTable (div, tableData, keys){
     $(div).handsontable({
         data: tableData,
-        // rowHeaders: tableData.title,
         colHeaders: keys,
         fixedRowsTop: 1,
         contextMenu: true,
-        readOnly: true
+        readOnly: true,
+        columnSorting: true,
+        persistentState: true,
+        manualColumnMove: true,
+        manualColumnResize: true
       });
+  }
+
+  function makeSortable(tableObject) {
+    var table = $(tableObject).handsontable('getInstance');
+    $('.reset-state').on('click', function() {
+      table.updateSettings({
+        columnSorting: true,
+        manualColumnMove: true,
+        manualColumnResize: true
+      });
+
+      $('.state-loaded').fadeOut(300);
+    });
+
+    // do we need this? doesn't seem to add any additional functionality..
+    var storedData = {};
+    table.PluginHooks.run('persistentStateLoad', '_persistentStateKeys', storedData);
+    var savedKeys = storedData.value;
+    if (savedKeys && savedKeys.length > 0) {
+      $('.state-loaded').show();
+    };
   }
 
   $.ajax('/group_campaigns/' + group_campaign_id + '.json', {
@@ -56,12 +84,14 @@ $(document).ready(function() {
         keysCampaign.push(kNew);
       }
       makeGroupedTable(".tableGroupCampaign", dataResponse, keysGroupCampaign);
-      makeCampaignsTable(".tableGroupCampaigns", campaigns, keysCampaign);
-      console.log(campaigns);
+      makeCampaignsTable(".tableGCCampaigns", campaigns, keysCampaign);
+      makeSortable(".tableGroupCampaign");
+      makeSortable(".tableGCCampaigns");
     },
     error: function(data) {
       console.log("Error with the fetch");
     }
   });
+
 
 });
