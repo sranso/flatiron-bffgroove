@@ -1,3 +1,4 @@
+var data1;
 $(document).ready(function() {
   // $(".tableGCCampaigns").addClass("hide_table");
   $(".show_button").on("click", function(e) {
@@ -90,6 +91,28 @@ $(document).ready(function() {
       console.log("Error with the fetch");
     }
   });
+
+  $.ajax('/campaigns.json', {
+    type: 'GET',
+    success: function(data) {
+      console.log(data);
+      data1 = data;
+      var dataResponse = data;
+      var keysCampaigns = [];
+
+      for (var k in dataResponse[0]) {
+        kNew = replaceAll("_", " ", k).toUpperCase();
+        keysCampaigns.push(kNew);
+      }
+
+      makeCampaignsTable(".tableCampaigns", dataResponse, keysCampaigns);
+      makeSortable(".tableCampaigns");
+    },
+    error: function(data) {
+      console.log("Error with the fetch");
+    }
+  });
+
 
 
 });
