@@ -1,5 +1,5 @@
 %h1= @group_campaign.title
 .tableGroupCampaign
 %a.button.show_button{:method => "get"} Show Campaigns
-.tableGCCampaigns
+.tableGCCampaigns.hide_table
 %input.group_campaign_id{:type => "hidden", :name => "group_campaign_id", :value => "#{@group_campaign.id}"}
