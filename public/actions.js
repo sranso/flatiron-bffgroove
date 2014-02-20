@@ -21,7 +21,6 @@ $(document).ready(function() {
         rowHeaders: tableData.title,
         colHeaders: keys,
         fixedRowsTop: 1,
-        contextMenu: true,
         readOnly: true,
         columnSorting: true,
         persistentState: true,
@@ -35,7 +34,6 @@ $(document).ready(function() {
         data: tableData,
         colHeaders: keys,
         fixedRowsTop: 1,
-        contextMenu: true,
         readOnly: true,
         columnSorting: true,
         persistentState: true,
@@ -68,7 +66,7 @@ $(document).ready(function() {
   $.ajax('/group_campaigns/' + group_campaign_id + '.json', {
     type: 'GET',
     success: function(data) {
-      var dataResponse = data;
+      var dataResponse = data[0];
       var campaigns;
       var keysGroupCampaign = [];
       var keysCampaign = [];
