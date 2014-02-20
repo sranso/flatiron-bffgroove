@@ -2,12 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.campaigns_table{
-  display: none;
-}
+/*.tableGCCampaigns {
+  display: block;
+}*/
 
-.display_table {
-  display: table;
+.hide_table {
+  /*display: none;*/
+  opacity: 0;
 }
 
 .table-wrapper {

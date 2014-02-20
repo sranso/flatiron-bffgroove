@@ -3,10 +3,20 @@ class GroupCampaignController < ApplicationController
 
   def index
     @group_campaigns = GroupCampaign.order(:id)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @group_campaigns }
+    end
   end 
 
   def show
     @group_campaign = GroupCampaign.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @group_campaign, :methods => :campaigns }
+    end
   end
   
   def search
@@ -15,6 +25,5 @@ class GroupCampaignController < ApplicationController
     end
     @group_campaigns = @search.results
   end  
-
 
 end
