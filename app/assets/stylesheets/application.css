@@ -9,12 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
-<<<<<<< HEAD
  *= require jquery.handsontable.bootstrap
  *= require jquery.handsontable
- */
-=======
- *= require_tree .
  */
 
 .custom-bar{
@@ -24,7 +20,7 @@ table, th, td {
   border: 1px solid black;
 }
 .tableCampaigns {
-  height: 80%;
+  height: 600px;
   overflow: scroll;
   width: inherit;
   margin-top: 20px;
@@ -44,4 +40,3 @@ h1 {
 .hide_table {
   opacity: 0;
 }
->>>>>>> eb8d645b20bbf34d8566f50feeaf9e9fb000a798
