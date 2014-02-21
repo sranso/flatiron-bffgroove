@@ -24,7 +24,8 @@ $(document).ready(function() {
         columnSorting: true,
         persistentState: true,
         manualColumnMove: true,
-        manualColumnResize: true
+        manualColumnResize: true,
+        contextMenu: true
       });
   }
 
@@ -35,11 +36,9 @@ $(document).ready(function() {
         readOnly: true,
         columnSorting: true,
         persistentState: true,
-        manualColumnMove: true
-<<<<<<< HEAD
-=======
+        manualColumnMove: true,
+        contextMenu: true
         // manualColumnResize: true
->>>>>>> f20bc7c5b8f3e128990137f62c2a31c73132621d
       });
   }
 
@@ -49,7 +48,8 @@ $(document).ready(function() {
       table.updateSettings({
         columnSorting: true,
         manualColumnMove: true,
-        manualColumnResize: true
+        manualColumnResize: true,
+        contextMenu: true
       });
 
       $('.state-loaded').fadeOut(300);

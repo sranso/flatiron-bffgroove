@@ -6,10 +6,7 @@ class GroupCampaignController < ApplicationController
 
     respond_to do |format|
       format.html
-<<<<<<< HEAD
       format.csv { send_data GroupCampaign.to_csv }
-=======
->>>>>>> f20bc7c5b8f3e128990137f62c2a31c73132621d
       format.json { render "group_campaign/index.json.rabl" }
     end
   end 
@@ -19,10 +16,7 @@ class GroupCampaignController < ApplicationController
 
     respond_to do |format|
       format.html
-<<<<<<< HEAD
       format.csv { send_data @group_campaign.to_csv }
-=======
->>>>>>> f20bc7c5b8f3e128990137f62c2a31c73132621d
       format.json { render "group_campaign/show.json.rabl" }
     end
   end

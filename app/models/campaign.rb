@@ -49,7 +49,6 @@ class Campaign < ActiveRecord::Base
     end
   end
 
-<<<<<<< HEAD
   def self.to_csv
     CSV.generate do |csv|
       csv << column_names
@@ -58,6 +57,5 @@ class Campaign < ActiveRecord::Base
       end
     end
   end
-=======
->>>>>>> f20bc7c5b8f3e128990137f62c2a31c73132621d
+
 end
