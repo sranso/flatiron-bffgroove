@@ -2,26 +2,3 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-/*.tableGCCampaigns {
-  display: block;
-}*/
-
-.hide_table {
-  /*display: none;*/
-  opacity: 0;
-}
-
-.table-wrapper {
-  position: relative;
-}
-
-.table-wrapper table {
-  width: 100%;
-}
-
-.table-scroll {
-  height: auto;
-  max-height: 600px;
-  overflow: auto;
-  margin-top: 20px;
-}

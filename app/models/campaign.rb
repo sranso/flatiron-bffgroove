@@ -51,7 +51,6 @@ class Campaign < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate do |csv|
-      debugger
       csv << column_names
       all.each do |campaign|
         csv << campaign.attributes.values_at(*column_names)
