@@ -15,3 +15,27 @@
 .custom-bar{
   min-height: 53px;
 }
+table, th, td {
+  border: 1px solid black;
+}
+.tableCampaigns {
+  height: 80%;
+  overflow: scroll;
+  width: inherit;
+  margin-top: 20px;
+}
+.large-1.columns {
+  color: white;
+}
+h1 {
+  display: inline-block;
+}
+.csv {
+  height: 25px;
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 14px;
+}
+.hide_table {
+  opacity: 0;
+}

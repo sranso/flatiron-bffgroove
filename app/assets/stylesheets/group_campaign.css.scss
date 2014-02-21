@@ -2,30 +2,3 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-h1 {
-  display: inline-block;
-}
-.csv {
-  height: 25px;
-  display: inline-block;
-  margin-left: 20px;
-  margin-bottom: 14px;
-}
-.hide_table {
-  opacity: 0;
-}
-
-.table-wrapper {
-  position: relative;
-}
-
-.table-wrapper table {
-  width: 100%;
-}
-
-.table-scroll {
-  height: auto;
-  max-height: 600px;
-  overflow: auto;
-  margin-top: 20px;
-}
