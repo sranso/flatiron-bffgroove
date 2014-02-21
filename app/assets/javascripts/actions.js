@@ -36,6 +36,10 @@ $(document).ready(function() {
         columnSorting: true,
         persistentState: true,
         manualColumnMove: true
+<<<<<<< HEAD
+=======
+        // manualColumnResize: true
+>>>>>>> f20bc7c5b8f3e128990137f62c2a31c73132621d
       });
   }
 

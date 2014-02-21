@@ -24,6 +24,7 @@ class GroupCampaign < ActiveRecord::Base
     self[:open_rate] = (self[:unique_opens].to_f/self[:successful_deliveries].to_f)*100.round(2)
   end
 
+<<<<<<< HEAD
   def self.to_csv
     CSV.generate do |csv|
       csv << column_names
@@ -43,5 +44,22 @@ class GroupCampaign < ActiveRecord::Base
     end
   end
 
+=======
+  # def self.search_engine(search)
+  #   title_results = []
+  #   self.all.each do |group_campaign|
+  #     title_results << group_campaign if group_campaign.title.include?(search) 
+  #   end 
+  #   title_results
+  # end 
+  
+  # def self.reassign_nils
+  #   empty = GroupCampaign.find_by_title("")
+  #   empty.campaigns.each do |campaign|
+  #     Campaign.find_by_subject(campaign.subject)
+  #   end
+  # end
+  #SELECT SUM("campaigns"."total_recipients") AS sum_id FROM "campaigns" WHERE "campaigns"."group_campaign_id" = 402
+>>>>>>> f20bc7c5b8f3e128990137f62c2a31c73132621d
 
 end
