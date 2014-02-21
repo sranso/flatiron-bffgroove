@@ -28,7 +28,7 @@ table, th, td {
 .large-1.columns {
   color: white;
 }
-h1 {
+.csv-h1 {
   display: inline-block;
 }
 .csv {
