@@ -7,4 +7,5 @@ end
 task :import => :environment do
   Campaign.import("main.csv")
   Campaign.group_campaigns
+  GroupCampaign.aggregate
 end
