@@ -9,9 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require jquery.handsontable.bootstrap
+ *= require jquery.handsontable
  */
-
-.custom-bar{
-  min-height: 53px;
-}
