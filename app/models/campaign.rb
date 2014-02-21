@@ -27,12 +27,10 @@ class Campaign < ActiveRecord::Base
     decimal_array = [:open_rate, :analytics_roi, :campaign_cost, :revenue_created, :bounce_rate, :goal_conversion_rate, :per_visit_goal_value, :ecommerce_conversion_rate, :per_visit_value, :average_value]
 
     integer_array.each do |key|
-      # key = key.to_s
       row[key] = row[key].to_i
     end 
 
     decimal_array.each do |key|
-      # key = key.to_s
       row[key] = row[key].gsub("$","").to_f if row[key]
     end
     row
