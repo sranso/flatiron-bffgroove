@@ -15,7 +15,7 @@ class Campaign < ActiveRecord::Base
   def self.import(file)
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
       row = convert(row)
-      campaign = find_by_unique_id(row["unique_id"]) || new
+      campaign = find_by_unique_id(row[:unique_id]) || new
       campaign.attributes = row.to_hash
       campaign.save!
     end
