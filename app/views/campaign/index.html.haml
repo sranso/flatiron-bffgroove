@@ -1,20 +1,2 @@
 %h1 This is your CSV
-
-/ %form{action: "#"}
-/ %input{type: "text", name: "search"}
-/ %buttom{}
-
-.table-wrapper
-  .table-scroll
-    %table
-      %thead
-        %tr
-          - @campaigns.first.attributes.each do |key, value|
-            %th= key.capitalize.gsub("_", " ")
-      - @campaigns.each do |campaign|
-        %tr
-          - campaign.attributes.each do |key, value|
-            - if key == "title"
-              %td=link_to value, "group_campaigns/#{campaign.group_campaign_id}"
-            - else
-              %td=value
+.tableCampaigns
