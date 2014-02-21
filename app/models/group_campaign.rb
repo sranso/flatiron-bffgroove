@@ -35,10 +35,10 @@ class GroupCampaign < ActiveRecord::Base
 
   def to_csv
     CSV.generate do |csv|
-      debugger
-      csv << column_names
-      all.each do |group_campaign|
-        csv << group_campaign.attributes.values_at(*column_names)
+      csv << GroupCampaign.column_names
+      csv << attributes.values_at(*GroupCampaign.column_names)
+      campaigns.each do |campaign|
+        csv << campaign.attributes.values_at(*GroupCampaign.column_names)
       end
     end
   end

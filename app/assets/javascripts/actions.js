@@ -19,7 +19,6 @@ $(document).ready(function() {
   function makeGroupedTable (div, tableData, keys){
     $(div).handsontable({
         data: tableData,
-        rowHeaders: tableData.title,
         colHeaders: keys,
         readOnly: true,
         columnSorting: true,
@@ -37,7 +36,6 @@ $(document).ready(function() {
         columnSorting: true,
         persistentState: true,
         manualColumnMove: true
-        // manualColumnResize: true
       });
   }
 
