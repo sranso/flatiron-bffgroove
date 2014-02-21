@@ -1,4 +1,6 @@
 %h1= @group_campaign.title
+%a{:href=>"#{@group_campaign.id}.csv"}
+  %img.csv{:src=>"/csv.svg"}
 .tableGroupCampaign
 %a.button.show_button{:method => "get"} Show Campaigns
 .tableGCCampaigns.hide_table
