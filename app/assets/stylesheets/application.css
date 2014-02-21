@@ -11,12 +11,17 @@
  *= require_self
  *= require_tree .
  */
-
 .custom-bar{
   min-height: 53px;
 }
 table, th, td {
   border: 1px solid black;
+}
+.htDimmed {
+  color: blue;
+}
+tr {
+  height: 100px;
 }
 .tableCampaigns {
   height: 80%;

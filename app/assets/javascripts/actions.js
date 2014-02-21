@@ -1,6 +1,5 @@
 var data1;
 $(document).ready(function() {
-  // $(".tableGCCampaigns").addClass("hide_table");
   $(".show_button").on("click", function(e) {
     $(".tableGCCampaigns").toggleClass("hide_table");
     if ($(".tableGCCampaigns").hasClass("hide_table")) {
@@ -38,7 +37,6 @@ $(document).ready(function() {
         persistentState: true,
         manualColumnMove: true,
         contextMenu: true
-        // manualColumnResize: true
       });
   }
 
@@ -106,13 +104,10 @@ $(document).ready(function() {
 
       makeCampaignsTable(".tableCampaigns", dataResponse, keysCampaigns);
       makeSortable(".tableCampaigns");
-
     },
     error: function(data) {
       console.log("Error with the fetch");
     }
   });
-
-
 
 });
