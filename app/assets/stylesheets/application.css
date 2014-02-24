@@ -16,6 +16,12 @@
 table, th, td {
   border: 1px solid black;
 }
+.htDimmed {
+  color: blue;
+}
+tr {
+  height: 100px;
+}
 .tableCampaigns {
   height: 600px;
   overflow: scroll;
@@ -25,6 +31,7 @@ table, th, td {
 .large-1.columns {
   color: white;
 }
+
 h1 {
   display: inline-block;
 }
