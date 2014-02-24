@@ -13,9 +13,6 @@
  *= require jquery.handsontable
  */
 
-.custom-bar{
-  min-height: 53px;
-}
 table, th, td {
   border: 1px solid black;
 }
@@ -39,4 +36,8 @@ h1 {
 }
 .hide_table {
   opacity: 0;
+}
+
+.show_button{
+  margin: 20px auto;
 }
