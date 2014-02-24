@@ -185,6 +185,7 @@ DEPENDENCIES
   figaro
   gibbon
   haml
+  httparty
   jbuilder
   jquery-rails
   mechanize

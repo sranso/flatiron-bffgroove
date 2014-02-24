@@ -1,4 +1,5 @@
 class MailChimpCrawler
+<<<<<<< HEAD
   def initialize
     @agent = Gibbon::API.new(API_KEY)
   end
@@ -14,16 +15,13 @@ class MailChimpCrawler
       logged_in = @agent.page.form.submit
     end
   end
+=======
+  attr_reader :campaigns_response
+>>>>>>> 6edc7f628c60c048fab37ed5a7115d2b82b50678
 
-  def download
-    @agent.pluggable_parser.default = Mechanize::Download
-    @agent.get('https://us5.admin.mailchimp.com/reports/export-all').save("main.csv")
+  def initialize
+    response = HTTParty.get("https://us5.api.mailchimp.com/2.0/campaigns/list?apikey=#{ENV['API_KEY']}")
+    @campaigns_response = response["data"]
   end
 
-  def update_header
-    header = "title,subject,list,send_date,send_weekday,total_recipients,successful_deliveries,soft_bounces,hard_bounces,total_bounces,times_forwarded,forwarded_opens,unique_opens,open_rate,total_opens,unique_clicks,click_rate,total_clicks,unsubscribes,abuse_complaints,times_liked_on_facebook,folder_id,unique_id,analytics_ROI,campaign_cost,revenue_created,visits,new_visits,pages_visit,bounce_rate,time_on_site,goal_conversion_rate,per_visit_goal_value,transactions,ecommerce_conversion_rate,per_visit_value,average_value"
-    
-    file.open("main.csv")
-
-  end
 end
