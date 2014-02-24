@@ -1,6 +1,6 @@
 class Campaign < ActiveRecord::Base
   include ActiveModel::Serializers::JSON
-  attr_accessible :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :times_liked_on_facebook, :folder_id, :unique_id, :analytics_roi, :campaign_cost, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :group_campaign_id
+  attr_accessible :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :unique_id, :analytics_roi, :campaign_cost, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :group_campaign_id
   has_one :group_campaign
 
   def self.get_api_response
@@ -28,7 +28,6 @@ class Campaign < ActiveRecord::Base
       current_campaign[:total_opens] = campaign["summary"]["opens"]
       current_campaign[:total_clicks] = campaign["summary"]["clicks"]
       current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
-      current_campaign[:times_liked_on_facebook] = campaign["summary"]["facebook_likes"]
       current_campaign[:unique_id] = campaign["summary"]["id"]
 
       google_analytics_hash = google_analytics(current_campaign.unique_id)
@@ -79,7 +78,7 @@ class Campaign < ActiveRecord::Base
   end
 
   def self.convert(row)
-    integer_array = [:total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :total_opens, :unique_clicks, :total_clicks, :unsubscribes,:abuse_complaints, :times_liked_on_facebook, :folder_id, :visits, :new_visits,:transactions]
+    integer_array = [:total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :total_opens, :unique_clicks, :total_clicks, :unsubscribes,:abuse_complaints, :visits, :new_visits,:transactions]
 
     decimal_array = [:open_rate, :analytics_roi, :campaign_cost, :revenue_created, :bounce_rate, :goal_conversion_rate, :per_visit_goal_value, :ecommerce_conversion_rate, :per_visit_value, :average_value]
 
