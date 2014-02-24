@@ -16,11 +16,7 @@ class Campaign < ActiveRecord::Base
     response = self.get_api_response
     response.each do |campaign|
       current_campaign = find_by_unique_id(campaign["id"]) || new
-      get_google_analytics(current_campaign.unique_id).each do |key, val|
-        current_campaign[:revenue_created] = "revenue"
-        current_campaign[:ecommerce_conversion_rate] = "ecomm_conversions"
-        current_campaign.set_attributes(key, val)
-      end
+
       current_campaign[:send_date] = campaign["send_time"]
       current_campaign[:total_recipients] = campaign["emails_sent"]
       current_campaign[:times_forwarded] = campaign["summary"]["forward"]
@@ -29,6 +25,15 @@ class Campaign < ActiveRecord::Base
       current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
       current_campaign[:times_liked_on_facebook] = campaign["summary"]["facebook_likes"]
       current_campaign[:unique_id] = campaign["summary"]["id"]
+
+      google_analytics_hash = get_google_analytics(current_campaign.unique_id)
+      current_campaign[:revenue_created] = google_analytics_hash["revenue"].to_f
+      conversion_rate = google_analytics_hash["ecomm_conversions"].to_f / current_campaign[:total_recipients]
+      current_campaign[:ecommerce_conversion_rate] = conversion_rate
+      google_analytics_hash.each do |key, val|
+        current_campaign.set_attributes(key, val)
+      end
+      
       campaign.each do |key, val|
         if key == "summary"
           val.each do |key2, val2|
