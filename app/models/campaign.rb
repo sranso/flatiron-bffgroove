@@ -5,13 +5,22 @@ class Campaign < ActiveRecord::Base
 
   def self.get_api_response
     api = MailChimpCrawler.new
-    api.campaigns_response
+  end
+
+  def self.get_google_analytics(campaign_id)
+    api = MailChimpCrawler.new
+    api.get_google_analytics(campaign_id)
   end
 
   def self.response_import
     response = self.get_api_response
     response.each do |campaign|
       current_campaign = find_by_unique_id(campaign["id"]) || new
+      get_google_analytics(current_campaign.unique_id).each do |key, val|
+        current_campaign[:revenue_created] = "revenue"
+        current_campaign[:ecommerce_conversion_rate] = "ecomm_conversions"
+        current_campaign.set_attributes(key, val)
+      end
       current_campaign[:send_date] = campaign["send_time"]
       current_campaign[:total_recipients] = campaign["emails_sent"]
       current_campaign[:times_forwarded] = campaign["summary"]["forward"]
