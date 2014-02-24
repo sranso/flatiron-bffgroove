@@ -27,14 +27,8 @@ class Campaign < ActiveRecord::Base
       current_campaign[:total_opens] = campaign["summary"]["opens"]
       current_campaign[:total_clicks] = campaign["summary"]["clicks"]
       current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
-      current_campaign[:] = campaign["summary"][""]
-      current_campaign[:] = campaign["summary"][""]
-      current_campaign[:] = campaign["summary"][""]
-      current_campaign[:] = campaign["summary"][""]
-      current_campaign[:] = campaign["summary"][""]
-      current_campaign[:] = campaign["summary"][""]
-      current_campaign[:] = campaign["summary"][""]
-      current_campaign[:] = campaign["summary"][""]
+      current_campaign[:times_liked_on_facebook] = campaign["summary"]["facebook_likes"]
+      current_campaign[:unique_id] = campaign["summary"]["id"]
       campaign.each do |key, val|
         if key == "summary"
           val.each do |key2, val2|
