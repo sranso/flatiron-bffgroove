@@ -12,6 +12,7 @@ end
 gem 'devise'
 gem 'haml'
 gem 'jbuilder'
+gem 'httparty'
 
 group :development do
   gem 'sqlite3'

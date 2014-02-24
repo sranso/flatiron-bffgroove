@@ -3,6 +3,13 @@ class Campaign < ActiveRecord::Base
   attr_accessible :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :times_liked_on_facebook, :folder_id, :unique_id, :analytics_roi, :campaign_cost, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :group_campaign_id
   has_one :group_campaign
 
+  attr_reader :response
+
+  def self.get_api_response
+    api = MailChimpCrawler.new
+    @response = api.campaigns_response
+  end
+  
   def self.to_builder
     all.each do |campaign|
       Jbuilder.new do |campaign|
