@@ -1,7 +1,4 @@
-%li{:class => "has-form"}
-  %form{:action => "/group_campaigns/search", :method =>"GET"}
-    %div{:class => "row-collapse"}
-      %div{:class => "small-8 columns"}
-        %input{:type =>"text", :name =>"search"}
-      %div{:class => "small-4 columns"}
-        %button{:type =>"submit"} Submit
+%form{:class => "navbar-form navbar-left", :role => "search", :action => "/group_campaigns/search", :method =>"GET"}
+  %div{:class => "form-group"}
+    %input{:type =>"text", :name =>"search"}
+  %button{:type =>"submit", :class => "btn btn-default"} Submit

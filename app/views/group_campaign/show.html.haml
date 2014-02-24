@@ -1,4 +1,5 @@
-%h1= @group_campaign.title
+%h1{:class => "csv-h1"}
+  = @group_campaign.title
 %a{:href=>"#{@group_campaign.id}.csv"}
   %img.csv{:src=>"/csv.svg"}
 .tableGroupCampaign
