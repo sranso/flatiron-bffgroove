@@ -19,9 +19,6 @@ table, th, td {
 .htDimmed {
   color: blue;
 }
-tr {
-  height: 100px;
-}
 .tableCampaigns {
   height: 600px;
   overflow: scroll;
@@ -31,11 +28,9 @@ tr {
 .large-1.columns {
   color: white;
 }
-
 .csv-h1 {
   display: inline-block;
 }
-
 .csv {
   height: 25px;
   display: inline-block;
@@ -45,7 +40,6 @@ tr {
 .hide_table {
   opacity: 0;
 }
-
 .show_button{
   margin: 20px auto;
 }
