@@ -3,22 +3,34 @@ class Campaign < ActiveRecord::Base
   attr_accessible :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :times_liked_on_facebook, :folder_id, :unique_id, :analytics_roi, :campaign_cost, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :group_campaign_id
   has_one :group_campaign
 
-  attr_reader :response
-
   def self.get_api_response
     api = MailChimpCrawler.new
-    @response = api.campaigns_response
+    api.campaigns_response
   end
-  
-  def self.to_builder
-    all.each do |campaign|
-      Jbuilder.new do |campaign|
-        debugger
-        campaign.(self, :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :times_liked_on_facebook, :folder_id, :unique_id, :analytics_roi, :campaign_cost, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :group_campaign_id)
+
+  def self.response_import
+    response = self.get_api_response
+    response.each do |campaign|
+      current_campaign = find_by_unique_id(campaign["id"]) || new
+      campaign.each do |key, val|
+        if key == "summary"
+          val.each do |key2, val2|
+            if key2 == "industry"
+              key2.each do |key3, val3|
+              end
+            end
+          end
+        end
       end
     end
-  end 
+  end
 
+  def set_attributes(key, val)
+    if column_names.include?(key)
+      update_attributes(key => val)
+    end
+  end
+  
   def self.import(file)
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
       row = convert(row)

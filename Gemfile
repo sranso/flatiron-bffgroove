@@ -36,7 +36,6 @@ gem 'jquery-rails'
 gem 'mechanize'
 gem 'whenever', :require => false
 gem 'figaro'
-gem 'gibbon'
 gem 'rabl'
 gem 'oj'
 
