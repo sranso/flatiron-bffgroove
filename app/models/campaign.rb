@@ -4,14 +4,19 @@ class Campaign < ActiveRecord::Base
   has_one :group_campaign
 
   def self.get_api_response
+    api = MailChimpCrawler.new.campaigns_response
+  end
+
+  def self.google_analytics(campaign_id)
     api = MailChimpCrawler.new
-    api.campaigns_response
+    api.google_analytics(campaign_id)
   end
 
   def self.response_import
-    response = self.get_api_response
+    response = get_api_response
     response.each do |campaign|
       current_campaign = find_by_unique_id(campaign["id"]) || new
+
       current_campaign[:send_date] = campaign["send_time"]
       current_campaign[:total_recipients] = campaign["emails_sent"]
       current_campaign[:times_forwarded] = campaign["summary"]["forward"]
@@ -19,6 +24,15 @@ class Campaign < ActiveRecord::Base
       current_campaign[:total_clicks] = campaign["summary"]["clicks"]
       current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
       current_campaign[:unique_id] = campaign["summary"]["id"]
+
+      google_analytics_hash = google_analytics(current_campaign.unique_id)
+      current_campaign[:revenue_created] = google_analytics_hash["revenue"].to_f
+      conversion_rate = google_analytics_hash["ecomm_conversions"].to_f / current_campaign[:total_recipients]
+      current_campaign[:ecommerce_conversion_rate] = conversion_rate
+      google_analytics_hash.each do |key, val|
+        current_campaign.set_attributes(key, val)
+      end
+      
       campaign.each do |key, val|
         if key == "summary"
           val.each do |key2, val2|
