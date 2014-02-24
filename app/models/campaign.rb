@@ -13,10 +13,13 @@ class Campaign < ActiveRecord::Base
     response.each do |campaign|
       current_campaign = find_by_unique_id(campaign["id"]) || new
       campaign.each do |key, val|
+        campaign.set_attributes(key, val)
         if key == "summary"
           val.each do |key2, val2|
+            campaign.set_attributes(key2, val2)
             if key2 == "industry"
               key2.each do |key3, val3|
+                campaign.set_attributes(key3, val3)
               end
             end
           end
