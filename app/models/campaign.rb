@@ -17,7 +17,7 @@ class Campaign < ActiveRecord::Base
     api.list_name(list_id)
   end
 
-  def self.response_import
+  def self.import_response
     response = get_api_response
     response.each do |campaign|
       current_campaign = find_by_unique_id(campaign["id"]) || new
@@ -66,30 +66,6 @@ class Campaign < ActiveRecord::Base
       end
       update_attributes(key => val)
     end
-  end
-  
-  def self.import(file)
-    CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
-      row = convert(row)
-      campaign = find_by_unique_id(row[:unique_id]) || new
-      campaign.attributes = row.to_hash
-      campaign.save!
-    end
-  end
-
-  def self.convert(row)
-    integer_array = [:total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :total_opens, :unique_clicks, :total_clicks, :unsubscribes,:abuse_complaints, :visits, :new_visits,:transactions]
-
-    decimal_array = [:open_rate, :analytics_roi, :campaign_cost, :revenue_created, :bounce_rate, :goal_conversion_rate, :per_visit_goal_value, :ecommerce_conversion_rate, :per_visit_value, :average_value]
-
-    integer_array.each do |key|
-      row[key] = row[key].to_i
-    end 
-
-    decimal_array.each do |key|
-      row[key] = row[key].gsub("$","").to_f if row[key]
-    end
-    row
   end
 
   def self.group_campaigns
