@@ -12,6 +12,11 @@ class Campaign < ActiveRecord::Base
     api.google_analytics(campaign_id)
   end
 
+  def self.list_name(list_id)
+    api = MailChimpCrawler.new
+    api.list_name(list_id)
+  end
+
   def self.response_import
     response = get_api_response
     response.each do |campaign|
@@ -48,6 +53,7 @@ class Campaign < ActiveRecord::Base
         else
           current_campaign.set_attributes(key, val)
         end
+        current_campaign.list = list_name(current_campaign.list.to_s)
       end
     end
   end
