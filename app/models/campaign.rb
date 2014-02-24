@@ -12,24 +12,45 @@ class Campaign < ActiveRecord::Base
     response = self.get_api_response
     response.each do |campaign|
       current_campaign = find_by_unique_id(campaign["id"]) || new
+      current_campaign[:send_date] = campaign["send_time"]
+      current_campaign[:total_recipients] = campaign["emails_sent"]
+      current_campaign[:times_forwarded] = campaign["summary"]["forward"]
+      current_campaign[:total_opens] = campaign["summary"]["opens"]
+      current_campaign[:total_clicks] = campaign["summary"]["clicks"]
+      current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
+      current_campaign[:] = campaign["summary"][""]
+      current_campaign[:] = campaign["summary"][""]
+      current_campaign[:] = campaign["summary"][""]
+      current_campaign[:] = campaign["summary"][""]
+      current_campaign[:] = campaign["summary"][""]
+      current_campaign[:] = campaign["summary"][""]
+      current_campaign[:] = campaign["summary"][""]
+      current_campaign[:] = campaign["summary"][""]
       campaign.each do |key, val|
-        campaign.set_attributes(key, val)
         if key == "summary"
           val.each do |key2, val2|
-            campaign.set_attributes(key2, val2)
             if key2 == "industry"
-              key2.each do |key3, val3|
-                campaign.set_attributes(key3, val3)
+              val2.each do |key3, val3|
+                current_campaign.set_attributes(key3, val3)
               end
+            else
+              current_campaign.set_attributes(key2, val2)
             end
           end
+        else
+          current_campaign.set_attributes(key, val)
         end
       end
     end
   end
 
   def set_attributes(key, val)
-    if column_names.include?(key)
+    if Campaign.column_names.include?(key) && key != "id"
+      if Campaign.columns_hash[key].type == :integer
+        val = val.to_i
+      elsif Campaign.columns_hash[key].type == :decimal
+        val = val.to_f
+      end
       update_attributes(key => val)
     end
   end
