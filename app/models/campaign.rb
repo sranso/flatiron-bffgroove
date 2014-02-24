@@ -4,16 +4,16 @@ class Campaign < ActiveRecord::Base
   has_one :group_campaign
 
   def self.get_api_response
-    api = MailChimpCrawler.new
+    api = MailChimpCrawler.new.campaigns_response
   end
 
-  def self.get_google_analytics(campaign_id)
+  def self.google_analytics(campaign_id)
     api = MailChimpCrawler.new
-    api.get_google_analytics(campaign_id)
+    api.google_analytics(campaign_id)
   end
 
   def self.response_import
-    response = self.get_api_response
+    response = get_api_response
     response.each do |campaign|
       current_campaign = find_by_unique_id(campaign["id"]) || new
 
@@ -26,7 +26,7 @@ class Campaign < ActiveRecord::Base
       current_campaign[:times_liked_on_facebook] = campaign["summary"]["facebook_likes"]
       current_campaign[:unique_id] = campaign["summary"]["id"]
 
-      google_analytics_hash = get_google_analytics(current_campaign.unique_id)
+      google_analytics_hash = google_analytics(current_campaign.unique_id)
       current_campaign[:revenue_created] = google_analytics_hash["revenue"].to_f
       conversion_rate = google_analytics_hash["ecomm_conversions"].to_f / current_campaign[:total_recipients]
       current_campaign[:ecommerce_conversion_rate] = conversion_rate
