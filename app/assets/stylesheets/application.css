@@ -32,9 +32,10 @@ tr {
   color: white;
 }
 
-h1 {
+.csv-h1 {
   display: inline-block;
 }
+
 .csv {
   height: 25px;
   display: inline-block;
