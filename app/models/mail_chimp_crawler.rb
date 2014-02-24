@@ -1,6 +1,6 @@
 class MailChimpCrawler
   def initialize
-    @agent = Mechanize.new
+    @agent = Gibbon::API.new(API_KEY)
   end
 
   def log_in
