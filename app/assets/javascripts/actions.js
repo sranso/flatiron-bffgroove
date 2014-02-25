@@ -9,28 +9,13 @@ $(document).ready(function() {
     });
   }
 
-  var descriptionRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+  var titleRenderer = function (instance, td, row, col, prop, value, cellProperties) {
     var escaped = Handsontable.helper.stringify(value);
-    escaped = strip_tags(escaped, '<em><b><a>'); //be sure you only allow certain HTML tags to avoid XSS threats (you should also remove unwanted HTML attributes)
+    escaped = strip_tags(escaped, '<a>'); //be sure you only allow certain HTML tags to avoid XSS threats (you should also remove unwanted HTML attributes)
     td.innerHTML = escaped;
     return td;
   };
 
-  var coverRenderer = function (instance, td, row, col, prop, value, cellProperties) {
-    var escaped = Handsontable.helper.stringify(value);
-    if (escaped.indexOf('http') === 0) {
-      var $img = $('<img>');
-      $img.attr('src', value);
-      $img.on('mousedown', function (event) {
-        event.preventDefault(); //prevent selection quirk
-      });
-      $(td).empty().append($img); //empty is needed because you are rendering to an existing cell
-    }
-    else {
-      Handsontable.renderers.TextRenderer.apply(this, arguments); //render as text
-    }
-    return td;
-  };
   $(".show_button").on("click", function(e) {
     $(".tableGCCampaigns").toggleClass("hide_table");
     if ($(".tableGCCampaigns").hasClass("hide_table")) {
@@ -172,7 +157,7 @@ $(document).ready(function() {
           manualColumnResize: true,
           contextMenu: true,
           columns: [
-            {data: "title", renderer: descriptionRenderer}, 
+            {data: "title", renderer: titleRenderer}, 
             {data: "send_date"} 
           ]
         });
