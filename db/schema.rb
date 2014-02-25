@@ -16,7 +16,11 @@ ActiveRecord::Schema.define(:version => 20140225171942) do
   create_table "campaigns", :force => true do |t|
     t.string   "title"
     t.string   "subject"
+<<<<<<< HEAD
     t.string   "list"
+=======
+    t.integer  "list_id",                   :limit => 255
+>>>>>>> 3fca7a58088db57c7a549f166adcd0ae37a54910
     t.datetime "send_date"
     t.string   "send_weekday"
     t.integer  "total_recipients"
@@ -59,7 +63,7 @@ ActiveRecord::Schema.define(:version => 20140225171942) do
   create_table "group_campaigns", :force => true do |t|
     t.string   "title"
     t.string   "subject"
-    t.string   "list"
+    t.integer  "list_id",                   :limit => 255
     t.datetime "send_date"
     t.string   "send_weekday"
     t.integer  "total_recipients"

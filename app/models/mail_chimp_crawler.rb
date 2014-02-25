@@ -10,7 +10,7 @@ class MailChimpCrawler
   end
 
   def all_lists
-    response =HTTParty.get("https://us5.api.mailchimp.com/2.0/lists/list?apikey=#{ENV['API_KEY']}&limit=100")
+    response = HTTParty.get("https://us5.api.mailchimp.com/2.0/lists/list?apikey=#{ENV['API_KEY']}&limit=100")
     response["data"]
   end
 

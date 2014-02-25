@@ -2,6 +2,7 @@ class Campaign < ActiveRecord::Base
   include ActiveModel::Serializers::JSON
   attr_accessible :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :unique_id, :analytics_roi, :campaign_cost, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :group_campaign_id, :folder_id
   has_one :group_campaign
+  belongs_to :list
   attr_reader :api
 
   def self.get_api_response
@@ -10,10 +11,6 @@ class Campaign < ActiveRecord::Base
 
   def self.google_analytics(campaign_id)
     @@api.google_analytics(campaign_id)
-  end
-
-  def self.list_name(list_id)
-    @@api.list_name(list_id)
   end
 
   def self.import_response
@@ -52,7 +49,7 @@ class Campaign < ActiveRecord::Base
         else
           current_campaign.set_attributes(key, val)
         end
-        current_campaign.list = list_name(current_campaign.list.to_s)
+        current_campaign.list_id = List.find_by_list_id(current_campaign.list_id).name
       end
     end
   end
