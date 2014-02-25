@@ -21,11 +21,11 @@ class GroupCampaignController < ApplicationController
     end
   end
   
-  def search
-    @search = GroupCampaign.search do 
-      fulltext params[:search]
-    end
-    @group_campaigns = @search.results
-  end  
+  # def search
+  #   @search = GroupCampaign.search do 
+  #     fulltext params[:search]
+  #   end
+  #   @group_campaigns = @search.results
+  # end  
 
 end
