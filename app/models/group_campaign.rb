@@ -16,6 +16,7 @@ class GroupCampaign < ActiveRecord::Base
         end
       end
       group_campaign.calculate_open_rate
+      group_campaign.calculate_send_date
       group_campaign.save!
     end
   end
@@ -42,5 +43,9 @@ class GroupCampaign < ActiveRecord::Base
       end
     end
   end
+
+  def calculate_send_date 
+    self.send_date = self.campaigns.order(:send_date)[0]
+  end 
 
 end
