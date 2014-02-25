@@ -1,6 +1,4 @@
 %h1{:class => "csv-h1"} These are the Group Campaigns
 %a{:href=>"group_campaigns.csv"}
   %img.csv{:src=>"/csv.svg"}
-%ul
-  - @group_campaigns.each do |group_campaign| 
-    %li=link_to group_campaign.title, "group_campaigns/#{group_campaign.id}"
+.tableGroupCampaigns
