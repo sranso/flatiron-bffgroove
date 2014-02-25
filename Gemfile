@@ -38,8 +38,8 @@ gem 'figaro'
 gem 'rabl'
 gem 'oj'
 
-gem 'sunspot_rails'
-gem 'sunspot_solr'
+# gem 'sunspot_rails'
+# gem 'sunspot_solr'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
