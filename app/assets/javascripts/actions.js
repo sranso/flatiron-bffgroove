@@ -110,4 +110,36 @@ $(document).ready(function() {
     }
   });
 
+$.ajax('/group_campaigns.json', {
+  type: 'GET', 
+  success: function(data){
+    data1 = data; 
+    var dataResponse = data; 
+    var keysGroupCampaigns = []; 
+
+    for (var k in dataResponse[0]){
+      kNew = replaceAll("_", " ", k).toUpperCase(); 
+      keysGroupCampaigns.push(kNew);
+    }
+    makeGroupCampaignsTable(".tableGroupCampaigns", dataResponse, keysGroupCampaigns);
+    makeSortable(".tableGroupCampaigns");
+  }, 
+
+  error: function(data){
+    console.log("Error with the fetch")
+  }
+})
+
+function makeGroupCampaignsTable(div, tableData, keys){
+  $(div).handsontable({
+        data: tableData,
+        colHeaders: keys,
+        readOnly: true,
+        columnSorting: true,
+        persistentState: true,
+        manualColumnMove: true,
+        manualColumnResize: true,
+        contextMenu: true
+      });
+}
 });
