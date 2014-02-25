@@ -9,6 +9,7 @@ node do |campaign|
     :click_rate => number_to_percentage(campaign.click_rate), 
     :bounce_rate => number_to_percentage(campaign.bounce_rate), 
     :goal_conversion_rate => number_to_percentage(campaign.goal_conversion_rate), 
-    :ecommerce_conversion_rate => number_to_percentage(campaign.ecommerce_conversion_rate)
+    :ecommerce_conversion_rate => number_to_percentage(campaign.ecommerce_conversion_rate), 
+    :send_date => group_campaign.send_date.strftime('%m-%d-%Y')
   }
 end 
