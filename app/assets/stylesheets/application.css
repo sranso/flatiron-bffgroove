@@ -43,3 +43,6 @@ table, th, td {
 .show_button{
   margin: 20px auto;
 }
+#datepicker {
+  margin-bottom: 20px;
+}

@@ -1,4 +1,6 @@
-%h1{:class => "csv-h1 "} This is your CSV
-%a{:href=>"campaigns.csv"}
+%h1{:class => "csv-h1"} This is your CSV
+%a{:href=>"date_campaigns.csv"}
   %img.csv{:src=>"/csv.svg"}
+%h1{:class => "csv-h1 btn"}
+  = render 'campaign/dateform'
 .tableCampaigns
