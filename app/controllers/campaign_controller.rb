@@ -3,6 +3,7 @@ class CampaignController < ApplicationController
 
   def index
     @campaigns = Campaign.order(:id).first(200)
+    # @campaigns.to_values
     respond_to do |format|
       format.html
       format.csv { send_data Campaign.to_csv}
