@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140218220348) do
+ActiveRecord::Schema.define(:version => 20140225172312) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "title"
     t.string   "subject"
-    t.string   "list"
+    t.integer  "list_id",                   :limit => 255
     t.datetime "send_date"
     t.string   "send_weekday"
     t.integer  "total_recipients"
@@ -51,15 +51,15 @@ ActiveRecord::Schema.define(:version => 20140218220348) do
     t.decimal  "ecommerce_conversion_rate"
     t.decimal  "per_visit_value"
     t.decimal  "average_value"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "group_campaign_id"
   end
 
   create_table "group_campaigns", :force => true do |t|
     t.string   "title"
     t.string   "subject"
-    t.string   "list"
+    t.integer  "list_id",                   :limit => 255
     t.datetime "send_date"
     t.string   "send_weekday"
     t.integer  "total_recipients"
@@ -94,8 +94,15 @@ ActiveRecord::Schema.define(:version => 20140218220348) do
     t.decimal  "ecommerce_conversion_rate"
     t.decimal  "per_visit_value"
     t.decimal  "average_value"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  create_table "lists", :force => true do |t|
+    t.string   "name"
+    t.string   "list_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
