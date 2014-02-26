@@ -1,5 +1,5 @@
 collection @group_campaign
-attributes(:title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :unique_id, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :average_value)
+attributes(:title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :unique_id, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate)
 
 node do |group_campaign|
   {
@@ -11,17 +11,19 @@ node do |group_campaign|
     :total_clicks => number_with_delimiter(campaign.total_clicks),
     :total_recipients => number_with_delimiter(campaign.total_recipients),
     :unique_clicks => number_with_delimiter(campaign.unique_clicks),
-    :open_rate => number_to_percentage(campaign.open_rate), 
+    :open_rate => number_to_percentage(campaign.open_rate, precision: 2), 
     :click_rate => number_to_percentage(campaign.click_rate), 
-    :bounce_rate => number_to_percentage(campaign.bounce_rate), 
-    :goal_conversion_rate => number_to_percentage(campaign.goal_conversion_rate), 
-    :ecommerce_conversion_rate => number_to_percentage(campaign.ecommerce_conversion_rate), 
-    :send_date => campaign.send_date.strftime('%m-%d-%Y')
+    :bounce_rate => number_to_percentage(campaign.bounce_rate, precision: 2), 
+    :goal_conversion_rate => number_to_percentage(campaign.goal_conversion_rate, precision: 2), 
+    :ecommerce_conversion_rate => number_to_percentage(campaign.ecommerce_conversion_rate, precision: 2), 
+    :send_date => campaign.send_date.strftime('%m-%d-%Y'),
+    :pagesvisit => number_with_precision(campaign.pagesvisit, precision: 2),
+    :time_on_site => distance_of_time_in_words(Time.at(0), Time.at(campaign.time_on_site))
   }
 end 
 
 child :campaigns, :object_root => false do
-  attributes :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :unique_id, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :average_value
+  attributes :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :unique_id, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate
 
   node do |campaign|
     {
@@ -33,12 +35,15 @@ child :campaigns, :object_root => false do
     :total_clicks => number_with_delimiter(campaign.total_clicks),
     :total_recipients => number_with_delimiter(campaign.total_recipients),
     :unique_clicks => number_with_delimiter(campaign.unique_clicks),
-    :open_rate => number_to_percentage(campaign.open_rate), 
+    :open_rate => number_to_percentage(campaign.open_rate, precision: 2), 
     :click_rate => number_to_percentage(campaign.click_rate), 
-    :bounce_rate => number_to_percentage(campaign.bounce_rate), 
-    :goal_conversion_rate => number_to_percentage(campaign.goal_conversion_rate), 
-    :ecommerce_conversion_rate => number_to_percentage(campaign.ecommerce_conversion_rate), 
-    :send_date => campaign.send_date.strftime('%m-%d-%Y')
+    :bounce_rate => number_to_percentage(campaign.bounce_rate, precision: 2), 
+    :goal_conversion_rate => number_to_percentage(campaign.goal_conversion_rate, precision: 2), 
+    :ecommerce_conversion_rate => number_to_percentage(campaign.ecommerce_conversion_rate, precision: 2), 
+    :send_date => campaign.send_date.strftime('%m-%d-%Y'),
+    :list => List.find(campaign.list_id).name,
+    :pagesvisit => number_with_precision(campaign.pagesvisit, precision: 2),
+    :time_on_site => distance_of_time_in_words(Time.at(0), Time.at(campaign.time_on_site))
     }
   end 
 end
