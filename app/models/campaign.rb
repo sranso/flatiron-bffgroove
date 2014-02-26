@@ -22,16 +22,20 @@ class Campaign < ActiveRecord::Base
 
       current_campaign[:send_date] = campaign["send_time"]
       current_campaign[:total_recipients] = campaign["emails_sent"]
-      current_campaign[:times_forwarded] = campaign["summary"]["forwards"] if campaign["summary"]["forwards"].class == Integer
-      current_campaign[:total_opens] = campaign["summary"]["opens"]
-      current_campaign[:total_clicks] = campaign["summary"]["clicks"]
-      current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
+      if campaign["summary"] != []
+        current_campaign[:times_forwarded] = campaign["summary"]["forwards"] if campaign["summary"]["forwards"].class == Integer
+        current_campaign[:total_opens] = campaign["summary"]["opens"]
+        current_campaign[:total_clicks] = campaign["summary"]["clicks"]
+        current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
+      end
 
       google_analytics_hash = google_analytics(current_campaign.unique_id)
-      if google_analytics_hash["revenue"]
+      if google_analytics_hash.parsed_response != []
         current_campaign[:revenue_created] = google_analytics_hash["revenue"].to_f
-        conversion_rate = google_analytics_hash["ecomm_conversions"].to_f / current_campaign[:total_recipients]
-        current_campaign[:ecommerce_conversion_rate] = conversion_rate
+        if current_campaign[:total_recipients] != 0
+          conversion_rate = google_analytics_hash["ecomm_conversions"].to_f / current_campaign[:total_recipients].to_f
+          current_campaign[:ecommerce_conversion_rate] = conversion_rate
+        end
         google_analytics_hash.each do |key, val|
           current_campaign.set_attributes(key, val)
         end
