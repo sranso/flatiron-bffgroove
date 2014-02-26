@@ -178,6 +178,7 @@ $(document).ready(function() {
   */
 
   $( "#from" ).datepicker({
+    dateFormat: 'yy-mm-dd',
     defaultDate: "-1w",
     changeMonth: true,
     numberOfMonths: 1,
@@ -186,6 +187,7 @@ $(document).ready(function() {
     }
   });
   $( "#to" ).datepicker({
+    dateFormat: 'yy-mm-dd',
     changeMonth: true,
     numberOfMonths: 1,
     onClose: function( selectedDate ) {

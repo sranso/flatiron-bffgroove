@@ -14,7 +14,6 @@ BFFGroove::Application.routes.draw do
   get '/campaigns' => 'campaign#index'
   get '/campaigns/date' => 'campaign#date'
   get '/group_campaigns'=> 'group_campaign#index'
-  get '/group_campaigns/search' => 'group_campaign#search'
   get '/group_campaigns/:id' => 'group_campaign#show'
 
 
