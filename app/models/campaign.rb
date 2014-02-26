@@ -31,6 +31,9 @@ class Campaign < ActiveRecord::Base
       if google_analytics_hash.parsed_response != []
         current_campaign[:total_bounces] = google_analytics_hash["bounces"]
         current_campaign[:revenue_created] = google_analytics_hash["revenue"].to_f
+        if current_campaign[:total_bounces] != nil
+          current_campaign[:total_recipients] = campaign["emails_sent"] - current_campaign[:total_bounces]
+        end
         if current_campaign[:total_recipients] != 0
           conversion_rate = google_analytics_hash["ecomm_conversions"].to_f / current_campaign[:total_recipients].to_f
           current_campaign[:ecommerce_conversion_rate] = conversion_rate
@@ -38,9 +41,6 @@ class Campaign < ActiveRecord::Base
         google_analytics_hash.each do |key, val|
           current_campaign.set_attributes(key, val)
         end
-      end
-      if current_campaign[:total_bounces] != nil
-        current_campaign[:total_recipients] = campaign["emails_sent"] - current_campaign[:total_bounces]
       end
       campaign.each do |key, val|
         if key == "summary"
@@ -60,6 +60,7 @@ class Campaign < ActiveRecord::Base
         else
           current_campaign.set_attributes(key, val)
         end
+        current_campaign.calculate_successful_deliveries
       end
     end
   end
@@ -73,6 +74,10 @@ class Campaign < ActiveRecord::Base
       end
       update_attributes(key.to_sym => val)
     end
+  end
+
+  def calculate_successful_deliveries
+    self[:successful_deliveries] = (self[:total_recipients] - self[:total_bounces])
   end
 
   def self.group_campaigns
@@ -96,5 +101,6 @@ class Campaign < ActiveRecord::Base
       end
     end
   end
+
 
 end
