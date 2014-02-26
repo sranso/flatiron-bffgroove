@@ -24,11 +24,8 @@ class GroupCampaign < ActiveRecord::Base
 
   def calculate_send_date
     self.send_date = campaigns.order(:send_date)[0].send_date
-  end 
-
-  def calculate_successful_deliveries
-    self[:successful_deliveries] = (self[:total_recipients] - self[:total_bounces])
   end
+
 
   def self.to_csv
     CSV.generate do |csv|
