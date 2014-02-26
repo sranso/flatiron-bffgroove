@@ -3,10 +3,6 @@ class GroupCampaign < ActiveRecord::Base
   attr_accessible :title, :subject, :list_id, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :unique_id, :analytics_roi, :campaign_cost, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :campaigns
   has_many :campaigns
 
-  # searchable do 
-  #   text :title, :subject, :list
-  # end
-
   def self.aggregate
     self.all.each do |group_campaign|
       GroupCampaign.columns_hash.each do |key,val|
@@ -16,6 +12,7 @@ class GroupCampaign < ActiveRecord::Base
         end
       end
       group_campaign.calculate_open_rate
+      group_campaign.calculate_send_date
       group_campaign.save!
     end
   end
@@ -42,5 +39,9 @@ class GroupCampaign < ActiveRecord::Base
       end
     end
   end
+
+  def calculate_send_date
+    self.send_date = campaigns.order(:send_date)[0].send_date
+  end 
 
 end
