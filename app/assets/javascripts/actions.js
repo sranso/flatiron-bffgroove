@@ -162,6 +162,37 @@ $(document).ready(function() {
           ]
         });
   }
+ /*
+  function makeDateCampaignsTable (div, tableData, keys){
+
+    $(div).handsontable({
+        data: tableData,
+        colHeaders: keys,
+        readOnly: true,
+        columnSorting: true,
+        persistentState: true,
+        manualColumnMove: true,
+        contextMenu: true
+      });
+  }
+  */
+
+  $( "#from" ).datepicker({
+    defaultDate: "-1w",
+    changeMonth: true,
+    numberOfMonths: 1,
+    onClose: function( selectedDate ) {
+      $( "#to" ).datepicker( "option", "minDate", selectedDate );
+    }
+  });
+  $( "#to" ).datepicker({
+    changeMonth: true,
+    numberOfMonths: 1,
+    onClose: function( selectedDate ) {
+      $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+    }
+  });
+
 
 });
 
