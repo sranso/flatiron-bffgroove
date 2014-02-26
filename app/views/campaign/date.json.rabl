@@ -3,7 +3,7 @@ attributes(:title, :subject, :list, :send_date, :send_weekday, :total_recipients
 
 node do |campaign|
   {
-    :revenue_created => number_to_currency(campaign.revenue_created, delimeter: ","), 
+    :revenue_created => number_to_currency(campaign.revenue_created, delimiter: ","), 
     :total_recipients => number_with_delimiter(campaign.total_recipients),
     :successful_deliveries => number_with_delimiter(campaign.successful_deliveries),
     :unique_opens => number_with_delimiter(campaign.unique_opens),
