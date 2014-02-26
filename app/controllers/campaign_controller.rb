@@ -11,7 +11,7 @@ class CampaignController < ApplicationController
     end
   end
 
-  def report
+  def self.report
     @report = Campaign.report do 
       fulltext params[:from], params[:to]
     end
