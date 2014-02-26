@@ -21,6 +21,10 @@ class GroupCampaign < ActiveRecord::Base
     self[:open_rate] = (self[:unique_opens].to_f/self[:successful_deliveries].to_f)*100.round(2)
   end
 
+  def calculate_send_date
+    self.send_date = campaigns.order(:send_date)[0].send_date
+  end
+
   def self.to_csv
     CSV.generate do |csv|
       csv << column_names
@@ -39,9 +43,5 @@ class GroupCampaign < ActiveRecord::Base
       end
     end
   end
-
-  def calculate_send_date
-    self.send_date = campaigns.order(:send_date)[0].send_date
-  end 
 
 end

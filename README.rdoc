@@ -1,3 +1,14 @@
 == BFFGroove
-This is a data managing tool for a company 
+This is a data managing tool for a company so that they can view email analytics.
 
+== Up And Running
+Fork and clone this repo
+bundle install
+rake db:migrate
+Get MailChimp username, password, and api key from company, save it in config/application.yml file
+In the rails console (rails c), run the following commands (in this order)
+  List.import_lists
+  Campaign.import_response
+  Campaign.group_campaigns
+  GroupCampaign.aggregate
+Start the server (rails s) and enjoy
