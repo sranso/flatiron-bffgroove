@@ -3,20 +3,20 @@ attributes(:title, :subject, :list, :send_date, :send_weekday, :total_recipients
 
 node do |group_campaign|
   {
-    :revenue_created => number_to_currency(campaign.revenue_created, delimeter: ","), 
-    :total_recipients => number_with_delimiter(campaign.total_recipients),
-    :successful_deliveries => number_with_delimiter(campaign.successful_deliveries),
-    :unique_opens => number_with_delimiter(campaign.unique_opens),
-    :total_opens => number_with_delimiter(campaign.total_opens),
-    :total_clicks => number_with_delimiter(campaign.total_clicks),
-    :total_recipients => number_with_delimiter(campaign.total_recipients),
-    :unique_clicks => number_with_delimiter(campaign.unique_clicks),
-    :click_rate => number_to_percentage(campaign.click_rate), 
-    :bounce_rate => number_to_percentage(campaign.bounce_rate, precision: 2), 
-    :goal_conversion_rate => number_to_percentage(campaign.goal_conversion_rate, precision: 2), 
-    :ecommerce_conversion_rate => number_to_percentage(campaign.ecommerce_conversion_rate, precision: 2), 
-    :send_date => campaign.send_date.strftime('%m-%d-%Y'),
-    :pagesvisit => number_with_precision(campaign.pagesvisit, precision: 2)
+    :revenue_created => number_to_currency(group_campaign.revenue_created, delimeter: ","), 
+    :total_recipients => number_with_delimiter(group_campaign.total_recipients),
+    :successful_deliveries => number_with_delimiter(group_campaign.successful_deliveries),
+    :unique_opens => number_with_delimiter(group_campaign.unique_opens),
+    :total_opens => number_with_delimiter(group_campaign.total_opens),
+    :total_clicks => number_with_delimiter(group_campaign.total_clicks),
+    :total_recipients => number_with_delimiter(group_campaign.total_recipients),
+    :unique_clicks => number_with_delimiter(group_campaign.unique_clicks),
+    :click_rate => number_to_percentage(group_campaign.click_rate), 
+    :bounce_rate => number_to_percentage(group_campaign.bounce_rate, precision: 2), 
+    :goal_conversion_rate => number_to_percentage(group_campaign.goal_conversion_rate, precision: 2), 
+    :ecommerce_conversion_rate => number_to_percentage(group_campaign.ecommerce_conversion_rate, precision: 2), 
+    :send_date => group_campaign.send_date.strftime('%m-%d-%Y'),
+    :pagesvisit => number_with_precision(group_campaign.pagesvisit, precision: 2)
   }
 end 
 
