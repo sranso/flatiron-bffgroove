@@ -12,7 +12,8 @@ class CampaignController < ApplicationController
   end
   
   def date
-    @campaigns = Campaign.date_range(params[:from], params[:to])
+    @campaigns = Campaign.date_range("2014-02-13", "2014-02-26")
+    # (params[:from], params[:to])
     
     respond_to do |format|
       format.html

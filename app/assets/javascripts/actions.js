@@ -56,6 +56,18 @@ $(document).ready(function() {
       });
   }
 
+  function makeDateCampaignsTable (div, tableData, keys){
+    $(div).handsontable({
+        data: tableData,
+        colHeaders: keys,
+        readOnly: true,
+        columnSorting: true,
+        persistentState: true,
+        manualColumnMove: true,
+        contextMenu: true
+      });
+  }
+
   function makeSortable(tableObject) {
     var table = $(tableObject).handsontable('getInstance');
     $('.reset-state').on('click', function() {
@@ -98,10 +110,8 @@ $(document).ready(function() {
       }
       makeGroupedTable(".tableGroupCampaign", dataResponse, keysGroupCampaign);
       makeCampaignsTable(".tableGCCampaigns", campaigns, keysCampaign);
-      makeDateCampaignsTable(".tableGCCampaigns", campaigns, keysCampaign);
       makeSortable(".tableGroupCampaign");
       makeSortable(".tableGCCampaigns");
-      makeSortable(".tableDateCampaigns");
     },
     error: function(data) {
       console.log("Error with the fetch");
@@ -164,20 +174,8 @@ $(document).ready(function() {
           ]
         });
   }
- 
-  function makeDateCampaignsTable (div, tableData, keys){
-    $(div).handsontable({
-        data: tableData,
-        colHeaders: keys,
-        readOnly: true,
-        columnSorting: true,
-        persistentState: true,
-        manualColumnMove: true,
-        contextMenu: true
-      });
-  }
 
-  $.ajax('/date.json', {
+  $.ajax('/campaigns/date' + '?' + '#{params[:from]}' + "&" + '#{params[:to]}' + '.json', {
     type: 'GET',
     success: function(data) {
       data1 = data;
