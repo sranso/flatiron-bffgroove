@@ -56,6 +56,18 @@ $(document).ready(function() {
       });
   }
 
+  // function makeDateCampaignsTable (div, tableData, keys){
+  //   $(div).handsontable({
+  //       data: tableData,
+  //       colHeaders: keys,
+  //       readOnly: true,
+  //       columnSorting: true,
+  //       persistentState: true,
+  //       manualColumnMove: true,
+  //       contextMenu: true
+  //     });
+  // }
+
   function makeSortable(tableObject) {
     var table = $(tableObject).handsontable('getInstance');
     $('.reset-state').on('click', function() {
@@ -162,6 +174,45 @@ $(document).ready(function() {
           ]
         });
   }
+
+  // $.ajax('/campaigns/date' + '?' + '#{params[:from]}' + "&" + '#{params[:to]}' + '.json', {
+  //   type: 'GET',
+  //   success: function(data) {
+  //     data1 = data;
+  //     var dataResponse = data;
+  //     var keysCampaigns = [];
+
+  //     for (var k in dataResponse[0]) {
+  //       kNew = replaceAll("_", " ", k).toUpperCase();
+  //       keysCampaigns.push(kNew);
+  //     }
+
+  //     makeDateCampaignsTable(".tableDateCampaigns", dataResponse, keysCampaigns);
+  //     makeSortable(".tableDateCampaigns");
+  //   },
+  //   error: function(data) {
+  //     console.log("Error with the fetch");
+  //   }
+  // });
+
+  $( "#from" ).datepicker({
+    dateFormat: 'yy-mm-dd',
+    defaultDate: "-1w",
+    changeMonth: true,
+    numberOfMonths: 1,
+    onClose: function( selectedDate ) {
+      $( "#to" ).datepicker( "option", "minDate", selectedDate );
+    }
+  });
+  $( "#to" ).datepicker({
+    dateFormat: 'yy-mm-dd',
+    changeMonth: true,
+    numberOfMonths: 1,
+    onClose: function( selectedDate ) {
+      $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+    }
+  });
+
 
 });
 

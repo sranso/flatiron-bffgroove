@@ -20,12 +20,6 @@ class GroupCampaignController < ApplicationController
       format.json { render "group_campaign/show.json.rabl" }
     end
   end
-  
-  # def search
-  #   @search = GroupCampaign.search do 
-  #     fulltext params[:search]
-  #   end
-  #   @group_campaigns = @search.results
-  # end  
+
 
 end

@@ -90,4 +90,10 @@ class Campaign < ActiveRecord::Base
     end
   end
 
+  def self.date_range(from,to)
+    datecampaignsfrom = from.to_s + "T00:00:00Z"
+    datecampaignsto = to.to_s + "T23:59:59Z"
+    campaigns = Campaign.where(:send_date => datecampaignsfrom..datecampaignsto)
+  end
+
 end
