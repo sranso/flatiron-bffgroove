@@ -9,12 +9,16 @@ class GroupCampaign < ActiveRecord::Base
         if val.type == :integer && key != "id"
           group_campaign[key] = group_campaign.campaigns.sum(key)
           group_campaign.save!
+        elsif key == "revenue_created"
+          group_campaign[key] = group_campaign.campaigns.sum(key)
+          group_campaign.save!
         end
       end
       group_campaign.calculate_send_date
       group_campaign.save!
     end
   end
+
   def calculate_send_date
     self.send_date = self.campaigns.order(:send_date)[0].send_date
   end
