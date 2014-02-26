@@ -2,7 +2,7 @@ class GroupCampaignController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @group_campaigns = GroupCampaign.order(:send_date).first(10)
+    @group_campaigns = GroupCampaign.order(:send_date).reverse
 
     respond_to do |format|
       format.html
