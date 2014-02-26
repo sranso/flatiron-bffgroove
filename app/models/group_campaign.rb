@@ -21,6 +21,10 @@ class GroupCampaign < ActiveRecord::Base
     self[:open_rate] = (self[:unique_opens].to_f/self[:successful_deliveries].to_f)*100.round(2)
   end
 
+  def calculate_successful_deliveries
+    self[:successful_deliveries] = (self[:total_recipients] - self[:total_bounces])
+  end
+
   def self.to_csv
     CSV.generate do |csv|
       csv << column_names
