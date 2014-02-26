@@ -1,7 +1,8 @@
 class Campaign < ActiveRecord::Base
   include ActiveModel::Serializers::JSON
-  attr_accessible :title, :subject, :list, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :unique_id, :analytics_roi, :campaign_cost, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :group_campaign_id, :folder_id
+  attr_accessible :title, :subject, :list_id, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :unique_id, :analytics_roi, :campaign_cost, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :group_campaign_id, :folder_id
   has_one :group_campaign
+  belongs_to :list
   attr_reader :api
 
   def self.get_api_response
@@ -12,32 +13,35 @@ class Campaign < ActiveRecord::Base
     @@api.google_analytics(campaign_id)
   end
 
-  def self.list_name(list_id)
-    @@api.list_name(list_id)
-  end
-
   def self.import_response
     @@api = MailChimpCrawler.new
     response = get_api_response
     response.each do |campaign|
       current_campaign = find_by_unique_id(campaign["id"]) || new
-
+      current_campaign[:unique_id] = campaign["id"]
       current_campaign[:send_date] = campaign["send_time"]
-      current_campaign[:total_recipients] = campaign["emails_sent"]
-      current_campaign[:times_forwarded] = campaign["summary"]["forward"]
-      current_campaign[:total_opens] = campaign["summary"]["opens"]
-      current_campaign[:total_clicks] = campaign["summary"]["clicks"]
-      current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
-      current_campaign[:unique_id] = campaign["summary"]["id"]
-
-      google_analytics_hash = google_analytics(current_campaign.unique_id)
-      current_campaign[:revenue_created] = google_analytics_hash["revenue"].to_f
-      conversion_rate = google_analytics_hash["ecomm_conversions"].to_f / current_campaign[:total_recipients]
-      current_campaign[:ecommerce_conversion_rate] = conversion_rate
-      google_analytics_hash.each do |key, val|
-        current_campaign.set_attributes(key, val)
+      if campaign["summary"] != []
+        current_campaign[:times_forwarded] = campaign["summary"]["forwards"] if campaign["summary"]["forwards"].class == Integer
+        current_campaign[:total_opens] = campaign["summary"]["opens"]
+        current_campaign[:total_clicks] = campaign["summary"]["clicks"]
+        current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
+        current_campaign[:total_bounces] = (campaign["summary"]["soft_bounces"] + campaign["summary"]["hard_bounces"])
       end
-      
+      google_analytics_hash = google_analytics(current_campaign.unique_id)
+      if google_analytics_hash.parsed_response != []
+        current_campaign[:total_bounces] = google_analytics_hash["bounces"]
+        current_campaign[:revenue_created] = google_analytics_hash["revenue"].to_f
+        if current_campaign[:total_bounces] != nil
+          current_campaign[:total_recipients] = campaign["emails_sent"] - current_campaign[:total_bounces]
+        end
+        if current_campaign[:total_recipients] != 0
+          conversion_rate = google_analytics_hash["ecomm_conversions"].to_f / current_campaign[:total_recipients].to_f
+          current_campaign[:ecommerce_conversion_rate] = conversion_rate
+        end
+        google_analytics_hash.each do |key, val|
+          current_campaign.set_attributes(key, val)
+        end
+      end
       campaign.each do |key, val|
         if key == "summary"
           val.each do |key2, val2|
@@ -49,10 +53,14 @@ class Campaign < ActiveRecord::Base
               current_campaign.set_attributes(key2, val2)
             end
           end
+        elsif key == "list_id"
+          list = List.find_by_list_id(val)
+          list.campaigns << current_campaign
+          list.save!
         else
           current_campaign.set_attributes(key, val)
         end
-        current_campaign.list = list_name(current_campaign.list.to_s)
+        current_campaign.calculate_successful_deliveries
       end
     end
   end
@@ -64,8 +72,12 @@ class Campaign < ActiveRecord::Base
       elsif Campaign.columns_hash[key].type == :decimal
         val = val.to_f
       end
-      update_attributes(key => val)
+      update_attributes(key.to_sym => val)
     end
+  end
+
+  def calculate_successful_deliveries
+    self[:successful_deliveries] = (self[:total_recipients] - self[:total_bounces])
   end
 
   def self.group_campaigns
