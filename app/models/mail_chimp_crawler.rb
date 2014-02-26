@@ -1,7 +1,7 @@
 class MailChimpCrawler
 
   def all_campaigns
-    response = HTTParty.get("https://us5.api.mailchimp.com/2.0/campaigns/list?apikey=#{ENV['API_KEY']}&limit=1000&filters[status]=sent")
+    response = HTTParty.get("https://us5.api.mailchimp.com/2.0/campaigns/list?apikey=#{ENV['API_KEY']}&limit=10&filters[status]=sent&sendtime_end=#{1.day.ago.strftime("%F")}")
     response["data"]
   end
 
