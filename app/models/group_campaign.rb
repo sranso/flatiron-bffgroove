@@ -11,9 +11,9 @@ class GroupCampaign < ActiveRecord::Base
           group_campaign.save!
         end
       end
+      group_campaign.calculate_successful_deliveries
       group_campaign.calculate_open_rate
       group_campaign.calculate_send_date
-      group_campaign.calculate_successful_deliveries
       group_campaign.save!
     end
   end
