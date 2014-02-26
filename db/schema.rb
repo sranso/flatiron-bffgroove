@@ -11,16 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140225171942) do
+ActiveRecord::Schema.define(:version => 20140225172312) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "title"
     t.string   "subject"
-<<<<<<< HEAD
-    t.string   "list"
-=======
     t.integer  "list_id",                   :limit => 255
->>>>>>> 3fca7a58088db57c7a549f166adcd0ae37a54910
     t.datetime "send_date"
     t.string   "send_weekday"
     t.integer  "total_recipients"
@@ -55,8 +51,8 @@ ActiveRecord::Schema.define(:version => 20140225171942) do
     t.decimal  "ecommerce_conversion_rate"
     t.decimal  "per_visit_value"
     t.decimal  "average_value"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "group_campaign_id"
   end
 
@@ -98,8 +94,8 @@ ActiveRecord::Schema.define(:version => 20140225171942) do
     t.decimal  "ecommerce_conversion_rate"
     t.decimal  "per_visit_value"
     t.decimal  "average_value"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   create_table "lists", :force => true do |t|
