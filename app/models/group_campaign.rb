@@ -13,6 +13,7 @@ class GroupCampaign < ActiveRecord::Base
       end
       group_campaign.calculate_open_rate
       group_campaign.calculate_send_date
+      group_campaign.calculate_successful_deliveries
       group_campaign.save!
     end
   end
@@ -20,6 +21,10 @@ class GroupCampaign < ActiveRecord::Base
   def calculate_open_rate
     self[:open_rate] = (self[:unique_opens].to_f/self[:successful_deliveries].to_f)*100.round(2)
   end
+
+  def calculate_send_date
+    self.send_date = campaigns.order(:send_date)[0].send_date
+  end 
 
   def calculate_successful_deliveries
     self[:successful_deliveries] = (self[:total_recipients] - self[:total_bounces])
@@ -43,9 +48,5 @@ class GroupCampaign < ActiveRecord::Base
       end
     end
   end
-
-  def calculate_send_date
-    self.send_date = campaigns.order(:send_date)[0].send_date
-  end 
 
 end
