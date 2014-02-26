@@ -11,21 +11,13 @@ class GroupCampaign < ActiveRecord::Base
           group_campaign.save!
         end
       end
-      group_campaign.calculate_successful_deliveries
-      group_campaign.calculate_open_rate
       group_campaign.calculate_send_date
       group_campaign.save!
     end
   end
-
-  def calculate_open_rate
-    self[:open_rate] = (self[:unique_opens].to_f/self[:successful_deliveries].to_f)*100.round(2)
-  end
-
   def calculate_send_date
     self.send_date = campaigns.order(:send_date)[0].send_date
   end
-
 
   def self.to_csv
     CSV.generate do |csv|
