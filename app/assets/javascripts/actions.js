@@ -175,7 +175,7 @@ $(document).ready(function() {
         });
   }
 
-  $.ajax('date.json', {
+  $.ajax('/campaigns/date.json', {
     type: 'GET',
     success: function(data) {
       data1 = data;
