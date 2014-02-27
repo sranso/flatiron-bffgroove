@@ -1,4 +1,3 @@
-var data1;
 $(document).ready(function() {
 
   function strip_tags(input, allowed){
@@ -121,7 +120,6 @@ $(document).ready(function() {
   $.ajax('/campaigns.json', {
     type: 'GET',
     success: function(data) {
-      data1 = data;
       var dataResponse = data;
       var keysCampaigns = [];
 
@@ -141,7 +139,6 @@ $(document).ready(function() {
   $.ajax('/group_campaigns.json', {
     type: 'GET', 
     success: function(data){
-      data1 = data; 
       var dataResponse = data; 
       var keysGroupCampaigns = []; 
 
@@ -175,6 +172,7 @@ $(document).ready(function() {
         });
   }
 
+<<<<<<< HEAD
   $("#blake").click(function(e){
     e.preventDefault();
     $.ajax('/campaigns/date.json?from=2014-02-13&to=2014-02-14', {
@@ -194,6 +192,17 @@ $(document).ready(function() {
       },
       error: function(data) {
         console.log("Error with the fetch");
+=======
+  $.ajax('/campaigns/date.json', {
+    type: 'GET',
+    success: function(data) {
+      var dataResponse = data;
+      var keysCampaigns = [];
+
+      for (var k in dataResponse[0]) {
+        kNew = replaceAll("_", " ", k).toUpperCase();
+        keysCampaigns.push(kNew);
+>>>>>>> 31d1ba64670aa6cbcd14564b4c1738a29844bb17
       }
     });
   })
