@@ -175,25 +175,28 @@ $(document).ready(function() {
         });
   }
 
-  $.ajax('/campaigns/date.json', {
-    type: 'GET',
-    success: function(data) {
-      data1 = data;
-      var dataResponse = data;
-      var keysCampaigns = [];
+  $("#blake").click(function(e){
+    e.preventDefault();
+    $.ajax('/campaigns/date.json?from=2014-02-13&to=2014-02-14', {
+      type: 'GET',
+      success: function(data) {
+        data1 = data;
+        var dataResponse = data;
+        var keysCampaigns = [];
 
-      for (var k in dataResponse[0]) {
-        kNew = replaceAll("_", " ", k).toUpperCase();
-        keysCampaigns.push(kNew);
+        for (var k in dataResponse[0]) {
+          kNew = replaceAll("_", " ", k).toUpperCase();
+          keysCampaigns.push(kNew);
+        }
+
+        makeDateCampaignsTable(".tableDateCampaigns", dataResponse, keysCampaigns);
+        makeSortable(".tableDateCampaigns");
+      },
+      error: function(data) {
+        console.log("Error with the fetch");
       }
-
-      makeDateCampaignsTable(".tableDateCampaigns", dataResponse, keysCampaigns);
-      makeSortable(".tableDateCampaigns");
-    },
-    error: function(data) {
-      console.log("Error with the fetch");
-    }
-  });
+    });
+  })
 
   $( "#from" ).datepicker({
     dateFormat: 'yy-mm-dd',
