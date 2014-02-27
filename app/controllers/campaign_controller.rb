@@ -12,11 +12,8 @@ class CampaignController < ApplicationController
   end
   
   def date
-    @campaigns = Campaign.date_range(params[:from], params[:to])
-    
-    respond_to do |format|
-      format.html
-      # format.csv { send_data @campaigns.to_csv}
+    @campaigns = Campaign.date_range(params["from"], params["to"])
+    # format.csv { send_data @campaigns.to_csv}
       format.json {render "campaign/date.json.rabl"}
     end
   end
