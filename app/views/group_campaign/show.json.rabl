@@ -35,7 +35,7 @@ child :campaigns, :object_root => false do
     :click_rate => number_to_percentage(campaign.click_rate), 
     :bounce_rate => number_to_percentage(campaign.bounce_rate, precision: 2), 
     :ecommerce_conversion_rate => number_to_percentage(campaign.ecommerce_conversion_rate, precision: 2), 
-    :send_date => campaign.send_date.strftime('%m-%d-%Y'),
+    :send_date => campaign.send_date.strftime('%m-%d-%Y %I:%M'),
     :list => List.find(campaign.list_id).name
     }
   end 
