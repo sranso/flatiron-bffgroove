@@ -1,4 +1,3 @@
-var data1;
 $(document).ready(function() {
 
   function strip_tags(input, allowed){
@@ -121,7 +120,6 @@ $(document).ready(function() {
   $.ajax('/campaigns.json', {
     type: 'GET',
     success: function(data) {
-      data1 = data;
       var dataResponse = data;
       var keysCampaigns = [];
 
@@ -141,7 +139,6 @@ $(document).ready(function() {
   $.ajax('/group_campaigns.json', {
     type: 'GET', 
     success: function(data){
-      data1 = data; 
       var dataResponse = data; 
       var keysGroupCampaigns = []; 
 
@@ -175,10 +172,9 @@ $(document).ready(function() {
         });
   }
 
-  $.ajax('date.json', {
+  $.ajax('/campaigns/date.json', {
     type: 'GET',
     success: function(data) {
-      data1 = data;
       var dataResponse = data;
       var keysCampaigns = [];
 
