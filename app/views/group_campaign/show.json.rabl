@@ -13,7 +13,6 @@ node do |group_campaign|
     :unique_clicks => number_with_delimiter(group_campaign.unique_clicks),
     :click_rate => number_to_percentage(group_campaign.click_rate), 
     :bounce_rate => number_to_percentage(group_campaign.bounce_rate, precision: 2), 
-    :goal_conversion_rate => number_to_percentage(group_campaign.goal_conversion_rate, precision: 2), 
     :ecommerce_conversion_rate => number_to_percentage(group_campaign.ecommerce_conversion_rate, precision: 2), 
     :send_date => group_campaign.send_date.strftime('%m-%d-%Y'),
     :pagesvisit => number_with_precision(group_campaign.pagesvisit, precision: 2)
@@ -35,8 +34,7 @@ child :campaigns, :object_root => false do
     :unique_clicks => number_with_delimiter(campaign.unique_clicks),
     :open_rate => number_to_percentage(campaign.open_rate, precision: 2), 
     :click_rate => number_to_percentage(campaign.click_rate), 
-    :bounce_rate => number_to_percentage(campaign.bounce_rate, precision: 2), 
-    :goal_conversion_rate => number_to_percentage(campaign.goal_conversion_rate, precision: 2), 
+    :bounce_rate => number_to_percentage(campaign.bounce_rate, precision: 2),  
     :ecommerce_conversion_rate => number_to_percentage(campaign.ecommerce_conversion_rate, precision: 2), 
     :send_date => campaign.send_date.strftime('%m-%d-%Y'),
     :list => List.find(campaign.list_id).name,

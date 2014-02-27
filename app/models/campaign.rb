@@ -60,6 +60,7 @@ class Campaign < ActiveRecord::Base
         else
           current_campaign.set_attributes(key, val)
         end
+        debugger
         current_campaign.calculate_successful_deliveries
       end
     end
