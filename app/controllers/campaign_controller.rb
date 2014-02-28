@@ -3,7 +3,6 @@ class CampaignController < ApplicationController
 
   def index
     @campaigns = Campaign.order(:send_date).reverse.first(200)
-    # @campaigns.to_values
     respond_to do |format|
       format.html
       format.csv {send_data @campaigns.to_csv}
@@ -15,7 +14,6 @@ class CampaignController < ApplicationController
     @campaigns = Campaign.date_range(params[:from], params[:to])
     respond_to do |format|
       format.html
-      debugger
       format.csv {send_data @campaigns.to_csv}
       format.json {render "campaign/date.json.rabl"}
     end
