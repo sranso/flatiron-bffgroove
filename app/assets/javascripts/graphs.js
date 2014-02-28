@@ -1,3 +1,13 @@
+var yAxisInput;
+
+$(document).ready(function(){
+  $(".dropdown a").on("click", function(e){
+    e.preventDefault();
+    yAxisInput = $(this).text();
+    console.log(yAxisInput);
+  });
+});
+
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
