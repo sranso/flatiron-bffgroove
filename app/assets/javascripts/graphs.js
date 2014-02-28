@@ -1,10 +1,9 @@
 var yAxisInput;
 
-$(document).ready(function(){
-  $(".dropdown a").on("click", function(e){
+$(document).ready(function() {
+  $(".dropdown a").click(function(e){
     e.preventDefault();
     yAxisInput = $(this).text();
-    console.log(yAxisInput);
   });
 });
 
@@ -30,10 +29,12 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json("/campaigns.json", function(error, data) {
+d3.json("/group_campaigns.json", function(error, data) {
   var keys = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  var columnNames = d3.keys(data[0]).filter(function(key) { return key == "total_clicks" });
+  var columnNames = d3.keys(data[0]).filter(function(key) { return key == yAxisInput });
   data.forEach(function(d) {
+    
+
 
   });
 });
