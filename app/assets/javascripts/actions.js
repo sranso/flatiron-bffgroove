@@ -54,19 +54,7 @@ $(document).ready(function() {
         contextMenu: true
       });
   }
-
-  function makeDateCampaignsTable (div, tableData, keys){
-    $(div).handsontable({
-        data: tableData,
-        colHeaders: keys,
-        readOnly: true,
-        columnSorting: true,
-        persistentState: true,
-        manualColumnMove: true,
-        contextMenu: true
-      });
-  }
-
+  
   function makeSortable(tableObject) {
     var table = $(tableObject).handsontable('getInstance');
     $('.reset-state').on('click', function() {
