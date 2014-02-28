@@ -172,10 +172,14 @@ $(document).ready(function() {
         });
   }
 
-<<<<<<< HEAD
-  $("#blake").click(function(e){
+
+
+  $("#dateTable").click(function(e){
     e.preventDefault();
-    $.ajax('/campaigns/date.json?from=2014-02-13&to=2014-02-14', {
+    $(".tableCampaigns").hide();
+    var from = $('#from').val();
+    var to = $('#to').val();
+    $.ajax('/campaigns/date.json?from=' + from + '&to=' + to, {
       type: 'GET',
       success: function(data) {
         data1 = data;
@@ -186,26 +190,15 @@ $(document).ready(function() {
           kNew = replaceAll("_", " ", k).toUpperCase();
           keysCampaigns.push(kNew);
         }
-
-        makeDateCampaignsTable(".tableDateCampaigns", dataResponse, keysCampaigns);
+        makeCampaignsTable(".tableDateCampaigns", dataResponse, keysCampaigns);
         makeSortable(".tableDateCampaigns");
       },
       error: function(data) {
         console.log("Error with the fetch");
-=======
-  $.ajax('/campaigns/date.json', {
-    type: 'GET',
-    success: function(data) {
-      var dataResponse = data;
-      var keysCampaigns = [];
-
-      for (var k in dataResponse[0]) {
-        kNew = replaceAll("_", " ", k).toUpperCase();
-        keysCampaigns.push(kNew);
->>>>>>> 31d1ba64670aa6cbcd14564b4c1738a29844bb17
       }
+
     });
-  })
+  });
 
   $( "#from" ).datepicker({
     dateFormat: 'yy-mm-dd',
