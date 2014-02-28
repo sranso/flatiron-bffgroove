@@ -21,21 +21,18 @@ class Campaign < ActiveRecord::Base
       current_campaign[:unique_id] = campaign["id"]
       current_campaign[:send_date] = campaign["send_time"]
       if campaign["summary"] != []
-        current_campaign[:times_forwarded] = campaign["summary"]["forwards"] if campaign["summary"]["forwards"].class == Integer
+        current_campaign[:times_forwarded] = campaign["summary"]["forwards"]
         current_campaign[:total_opens] = campaign["summary"]["opens"]
         current_campaign[:total_clicks] = campaign["summary"]["clicks"]
         current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
         current_campaign[:total_bounces] = (campaign["summary"]["soft_bounces"] + campaign["summary"]["hard_bounces"])
       end
+      current_campaign[:total_recipients] = campaign["emails_sent"] - current_campaign[:total_bounces]
       google_analytics_hash = google_analytics(current_campaign.unique_id)
       if google_analytics_hash.parsed_response != []
-        current_campaign[:total_bounces] = google_analytics_hash["bounces"]
         current_campaign[:revenue_created] = google_analytics_hash["revenue"].to_f
-        if current_campaign[:total_bounces] != nil
-          current_campaign[:total_recipients] = campaign["emails_sent"] - current_campaign[:total_bounces]
-        end
         if current_campaign[:total_recipients] != 0
-          conversion_rate = google_analytics_hash["ecomm_conversions"].to_f / current_campaign[:total_recipients].to_f
+          conversion_rate = (google_analytics_hash["ecomm_conversions"].to_f / google_analytics_hash["visits"]) * 100
           current_campaign[:ecommerce_conversion_rate] = conversion_rate
         end
         google_analytics_hash.each do |key, val|
@@ -60,8 +57,9 @@ class Campaign < ActiveRecord::Base
         else
           current_campaign.set_attributes(key, val)
         end
-        current_campaign.calculate_successful_deliveries
       end
+      current_campaign.calculate_successful_deliveries
+      current_campaign.save!
     end
   end
 
@@ -78,6 +76,7 @@ class Campaign < ActiveRecord::Base
 
   def calculate_successful_deliveries
     self[:successful_deliveries] = (self[:total_recipients] - self[:total_bounces])
+
   end
 
   def self.group_campaigns
