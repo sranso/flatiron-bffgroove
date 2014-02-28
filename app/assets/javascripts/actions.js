@@ -1,4 +1,3 @@
-var data1;
 $(document).ready(function() {
 
   function strip_tags(input, allowed){
@@ -45,6 +44,18 @@ $(document).ready(function() {
   }
 
   function makeCampaignsTable (div, tableData, keys){
+    $(div).handsontable({
+        data: tableData,
+        colHeaders: keys,
+        readOnly: true,
+        columnSorting: true,
+        persistentState: true,
+        manualColumnMove: true,
+        contextMenu: true
+      });
+  }
+
+  function makeDateCampaignsTable (div, tableData, keys){
     $(div).handsontable({
         data: tableData,
         colHeaders: keys,
@@ -109,7 +120,6 @@ $(document).ready(function() {
   $.ajax('/campaigns.json', {
     type: 'GET',
     success: function(data) {
-      data1 = data;
       var dataResponse = data;
       var keysCampaigns = [];
 
@@ -129,7 +139,6 @@ $(document).ready(function() {
   $.ajax('/group_campaigns.json', {
     type: 'GET', 
     success: function(data){
-      data1 = data; 
       var dataResponse = data; 
       var keysGroupCampaigns = []; 
 
@@ -162,6 +171,53 @@ $(document).ready(function() {
           ]
         });
   }
+
+
+
+  $("#dateTable").click(function(e){
+    e.preventDefault();
+    $(".tableCampaigns").hide();
+    var from = $('#from').val();
+    var to = $('#to').val();
+    $.ajax('/campaigns/date.json?from=' + from + '&to=' + to, {
+      type: 'GET',
+      success: function(data) {
+        data1 = data;
+        var dataResponse = data;
+        var keysCampaigns = [];
+
+        for (var k in dataResponse[0]) {
+          kNew = replaceAll("_", " ", k).toUpperCase();
+          keysCampaigns.push(kNew);
+        }
+        makeCampaignsTable(".tableDateCampaigns", dataResponse, keysCampaigns);
+        makeSortable(".tableDateCampaigns");
+      },
+      error: function(data) {
+        console.log("Error with the fetch");
+      }
+
+    });
+  });
+
+  $( "#from" ).datepicker({
+    dateFormat: 'yy-mm-dd',
+    defaultDate: "-1w",
+    changeMonth: true,
+    numberOfMonths: 1,
+    onClose: function( selectedDate ) {
+      $( "#to" ).datepicker( "option", "minDate", selectedDate );
+    }
+  });
+  $( "#to" ).datepicker({
+    dateFormat: 'yy-mm-dd',
+    changeMonth: true,
+    numberOfMonths: 1,
+    onClose: function( selectedDate ) {
+      $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+    }
+  });
+
 
 });
 
