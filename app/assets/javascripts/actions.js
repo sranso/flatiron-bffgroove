@@ -165,12 +165,12 @@ $(document).ready(function() {
   $("#dateTable").click(function(e){
     e.preventDefault();
     $(".tableCampaigns").hide();
+    $(".csv-link").attr("href", "/campaigns/date.csv?from=" + from + "&to=" + to);
     var from = $('#from').val();
     var to = $('#to').val();
     $.ajax('/campaigns/date.json?from=' + from + '&to=' + to, {
       type: 'GET',
       success: function(data) {
-        data1 = data;
         var dataResponse = data;
         var keysCampaigns = [];
 
@@ -180,6 +180,7 @@ $(document).ready(function() {
         }
         makeCampaignsTable(".tableDateCampaigns", dataResponse, keysCampaigns);
         makeSortable(".tableDateCampaigns");
+
       },
       error: function(data) {
         console.log("Error with the fetch");
