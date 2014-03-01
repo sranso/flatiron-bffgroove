@@ -60,7 +60,13 @@ class Campaign < ActiveRecord::Base
       end
       current_campaign.calculate_successful_deliveries
       current_campaign.save!
+      current_campaign.set_send_day
     end
+  end
+
+  def set_send_day
+    self.send_weekday = self.send_date.strftime("%A")
+    self.save!
   end
 
   def set_attributes(key, val)
@@ -76,7 +82,6 @@ class Campaign < ActiveRecord::Base
 
   def calculate_successful_deliveries
     self[:successful_deliveries] = (self[:total_recipients] - self[:total_bounces])
-
   end
 
   def self.group_campaigns

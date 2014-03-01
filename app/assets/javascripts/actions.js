@@ -165,9 +165,9 @@ $(document).ready(function() {
   $("#dateTable").click(function(e){
     e.preventDefault();
     $(".tableCampaigns").hide();
-    $(".csv-link").attr("href", "/campaigns/date.csv?from=" + from + "&to=" + to);
     var from = $('#from').val();
     var to = $('#to').val();
+    $(".csv-link").attr("href", "/campaigns/date.csv?from=" + from + "&to=" + to);
     $.ajax('/campaigns/date.json?from=' + from + '&to=' + to, {
       type: 'GET',
       success: function(data) {
