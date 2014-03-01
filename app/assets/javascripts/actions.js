@@ -39,7 +39,6 @@ $(document).ready(function() {
         persistentState: true,
         manualColumnMove: true,
         manualColumnResize: true,
-        contextMenu: true
       });
   }
 
@@ -51,7 +50,6 @@ $(document).ready(function() {
         columnSorting: true,
         persistentState: true,
         manualColumnMove: true,
-        contextMenu: true
       });
   }
   
@@ -62,7 +60,6 @@ $(document).ready(function() {
         columnSorting: true,
         manualColumnMove: true,
         manualColumnResize: true,
-        contextMenu: true
       });
 
       $('.state-loaded').fadeOut(300);
@@ -152,15 +149,12 @@ $(document).ready(function() {
           persistentState: true,
           manualColumnMove: true,
           manualColumnResize: true,
-          contextMenu: true,
           columns: [
             {data: "title", renderer: titleRenderer}, 
             {data: "send_date"} 
           ]
         });
   }
-
-
 
   $("#dateTable").click(function(e){
     e.preventDefault();
@@ -207,6 +201,4 @@ $(document).ready(function() {
     }
   });
 
-
 });
-
