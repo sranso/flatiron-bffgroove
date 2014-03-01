@@ -1,4 +1,4 @@
-$(document).ready(function() {
+// $(document).ready(function() {
 
   function strip_tags(input, allowed){
     allowed = (((allowed || "") + ""). toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('');
@@ -197,4 +197,4 @@ $(document).ready(function() {
     }
   });
 
-});
+// });
