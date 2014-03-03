@@ -42,9 +42,11 @@ $(document).ready(function() {
     d3.json("/group_campaigns/graph.json", function(error, data) {
       // returns keys, makes them for side bar
       response = data;
-      var campaignNames = d3.keys(data[0]).filter(function(key) { return key !== "weekday"; });
       // grouping each of the bars
+      var i = -1;
       response.forEach(function(d) {
+        i++;
+        campaignNames = d3.keys(data[i]).filter(function(key) { return key !== "weekday"; });
         d.days = campaignNames.map(function(name) {
           // debugger
           return {name: name, value: +d[name]};
