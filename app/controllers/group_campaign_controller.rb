@@ -23,6 +23,7 @@ class GroupCampaignController < ApplicationController
 
   def graph
     @group_campaigns = GroupCampaign.order(:send_date).reverse
+    @weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
     respond_to do |format|
       format.html
