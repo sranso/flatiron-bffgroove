@@ -30,6 +30,9 @@ $(document).ready(function() {
         .orient("left")
         .tickFormat(d3.format(".2s"));
 
+    // remove graph if it exists
+    d3.select(".svg svg").remove();
+
     var svg = d3.select(".svg").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -96,9 +99,10 @@ $(document).ready(function() {
           .style("fill", function(d) { return color(d.name); })
           .on("mouseover", function(d) {
             // debugger
+            d3.select()
             svg.append("text")
                .attr("class", "group-campaign-text")
-               .attr("transform", function() { return "translate(" + x0(d.send_weekday) + ",0)"; })
+               .attr("transform", function() { return "translate(" + x0(d.send_weekday) +",-10)"; })
                .attr("x", function() { return d.name; })
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
