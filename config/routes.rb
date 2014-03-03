@@ -14,11 +14,11 @@ BFFGroove::Application.routes.draw do
   get '/campaigns' => 'campaign#index'
   get '/campaigns/date' => 'campaign#date'
   get '/campaigns/date?from=:from&to=:to' => 'campaign#date'
+  get '/campaigns/graph' => 'campaign#graph'
+  get '/group_campaigns/graph' => 'group_campaign#graph'
   get '/group_campaigns'=> 'group_campaign#index'
   get '/group_campaigns/:id' => 'group_campaign#show'
-  get '/graphs' => 'graph#graph'
-
-
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

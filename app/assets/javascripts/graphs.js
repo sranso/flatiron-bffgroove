@@ -37,7 +37,7 @@ $(document).ready(function() {
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  d3.json("group_campaigns.json", function(error, data) {
+  d3.json("/group_campaigns/graph.json", function(error, data) {
     // returns keys, makes them for side bar
     response = data.slice(0,30);
     var campaignNames = [];

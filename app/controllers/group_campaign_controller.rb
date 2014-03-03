@@ -21,5 +21,14 @@ class GroupCampaignController < ApplicationController
     end
   end
 
+  def graph
+    @group_campaigns = GroupCampaign.order(:send_date).reverse
+
+    respond_to do |format|
+      format.html
+      format.json { render "group_campaign/graph.json.rabl" }
+    end
+  end
+
 
 end
