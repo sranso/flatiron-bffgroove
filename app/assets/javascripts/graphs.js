@@ -41,20 +41,13 @@ $(document).ready(function() {
 
     d3.json("/group_campaigns/graph.json", function(error, data) {
       // returns keys, makes them for side bar
-      response = data.slice(0,30);
-      var campaignNames = [];
-      response.forEach(function(d) {
-        campaignNames.push(d.title);
-      });
+      response = data;
+      var campaignNames = d3.keys(data[0]).filter(function(key) { return key !== "weekday"; }));
       // grouping each of the bars
+      debugger
       response.forEach(function(d) {
-        i = -1;
-        d.days = campaignNames.map(function(name) { 
-          i++;
-          if (typeof(response[i][yAxisInput]) == 'string') {
-            response[i][yAxisInput] = response[i][yAxisInput].replace("$","").replace(",","");
-          };
-          return {name: name, value: parseInt(response[i][yAxisInput])};
+        d.days = campaignNames.map(function(name) {
+          return {name: name, value: +d[name]};
         });
       });
       
@@ -65,7 +58,7 @@ $(document).ready(function() {
       // set scale of y axis
       y.domain([0, d3.max(response, function(d) {
         
-        return parseInt(d[yAxisInput]); })]);
+        return +d[name]; })]);
 
       svg.append("g")
           .attr("class", "x axis")
@@ -98,7 +91,6 @@ $(document).ready(function() {
           .attr("class", "group-campaign")
           .style("fill", function(d) { return color(d.name); })
           .on("mouseover", function(d) {
-            // debugger
             d3.select()
             svg.append("text")
                .attr("class", "group-campaign-text")
