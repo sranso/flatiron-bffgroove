@@ -12,6 +12,8 @@
  *= require jquery.handsontable.bootstrap
  *= require jquery.handsontable
  */
+
+ /* GRAPHS */
 .axis path,
 .axis line {
   fill: none;
@@ -24,6 +26,11 @@
 .x.axis path {
   display: none;
 }
+.legend {
+  margin-left: 20px;
+}
+
+/* TABLES */
 table, th, td {
   border: 1px solid black;
 }
