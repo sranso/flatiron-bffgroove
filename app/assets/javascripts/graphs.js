@@ -6,7 +6,8 @@ $(document).ready(function() {
     e.preventDefault();
     yAxisInput = $(this).text();
     console.log(yAxisInput);
-  });
+  
+
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
@@ -49,7 +50,10 @@ $(document).ready(function() {
       i = -1;
       d.days = campaignNames.map(function(name) { 
         i++;
-        return {name: name, value: response[i].unsubscribes};
+        if (typeof(response[i][yAxisInput]) == 'string') {
+          response[i][yAxisInput] = response[i][yAxisInput].replace("$","").replace(",","");
+        };
+        return {name: name, value: parseInt(response[i][yAxisInput])}; // HERE
       });
     });
     
@@ -59,7 +63,8 @@ $(document).ready(function() {
     x1.domain(campaignNames).rangeRoundBands([0, x0.rangeBand()]);
     // set scale of y axis
     y.domain([0, d3.max(response, function(d) {
-      return d.unsubscribes; })]);
+      
+      return parseInt(d[yAxisInput]); })]); // HERE
 
     svg.append("g")
         .attr("class", "x axis")
@@ -74,7 +79,7 @@ $(document).ready(function() {
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("unsubscribes");
+        .text(yAxisInput); // HERE
 
     var state = svg.selectAll(".state")
         .data(response)
@@ -109,6 +114,6 @@ $(document).ready(function() {
         .attr("dy", ".35em")
         .style("text-anchor", "end")
         .text(function(d) { return d; });
-
+        });
   });
 });
