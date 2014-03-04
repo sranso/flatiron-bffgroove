@@ -85,13 +85,13 @@ $(document).ready(function() {
           .style("text-anchor", "end")
           .text(yAxisInput);
 
-      var state = svg.selectAll(".state") // CHANGE THIS, NOT A STATE
+      var weekdayX = svg.selectAll(".weekdayX")
           .data(response)
         .enter().append("g")
           .attr("class", "g")
           .attr("transform", function(d) { return "translate(" + x0(d.weekday) + ",0)"; });
 
-      state.selectAll("rect")
+      weekdayX.selectAll("rect")
           .data(function(d) { return d.days; })
         .enter().append("rect")
           .attr("width", x1.rangeBand())
@@ -105,7 +105,8 @@ $(document).ready(function() {
             svg.append("text")
                .attr("class", "group-campaign-text")
                .attr("transform", function() { return "translate(" + x0(d.weekday) +",-10)"; })
-               .attr("x", function() { return d.name; })
+               .attr("x", 610)
+               .attr("y", 33)
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
                .text(function() { return d.name + ", " + d.value; });
@@ -113,6 +114,14 @@ $(document).ready(function() {
           .on("mouseout", function(d) {
             d3.select(".group-campaign-text").remove();
           });
+
+      svg.append("rect")
+          .attr("x", 600)
+          .attr("y", 20)
+          .attr("height", 100)
+          .attr("width", 300)
+          .attr("fill", "rgba(255,255,255,0.8)")
+          .attr("stroke", "#ccc");
 
       // var legend = svg.selectAll(".legend")
       //     .data(campaignNames.slice().reverse())
