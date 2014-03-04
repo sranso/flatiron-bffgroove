@@ -2,9 +2,9 @@ var response;
 var yAxisInput;
 $(document).ready(function() {
 
-  $(".dropdown a").click(function(e){
-    e.preventDefault();
-    yAxisInput = $(this).text();
+  // $(".dropdown a").click(function(e){
+    // e.preventDefault();
+    // yAxisInput = $(this).text();
 
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = 960 - margin.left - margin.right,
@@ -83,7 +83,7 @@ $(document).ready(function() {
           .attr("y", 6)
           .attr("dy", ".71em")
           .style("text-anchor", "end")
-          .text(yAxisInput);
+          .text("revenue created"); // yAxisInput
 
       var weekdayX = svg.selectAll(".weekdayX")
           .data(response)
@@ -109,7 +109,7 @@ $(document).ready(function() {
                .attr("y", 33)
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
-               .text(function() { return d.name + ", " + d.value; });
+               .text(function() { return d.name + ", $" + d.value.toFixed(2); });
           })
           .on("mouseout", function(d) {
             d3.select(".group-campaign-text").remove();
@@ -142,5 +142,5 @@ $(document).ready(function() {
       //     .style("text-anchor", "end")
       //     .text(function(d) { return d; });
     });
-  });
+  // });
 });
