@@ -83,7 +83,7 @@ $(document).ready(function() {
           .attr("y", 6)
           .attr("dy", ".71em")
           .style("text-anchor", "end")
-          .text(yAxisInput);
+          .text("revenue created"); // yAxisInput
 
       var weekdayX = svg.selectAll(".weekdayX")
           .data(response)
