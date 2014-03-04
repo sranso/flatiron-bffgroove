@@ -125,7 +125,12 @@ $(document).ready(function() {
                .attr("y", 60)
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
-               .text(function() { return "$" + d.value.toFixed(2); });
+               .text(function() {
+                if (yAxisInput == "revenue_created") {
+                  return "$" + d.value.toFixed(2); 
+                };
+                return d.value;
+              });
           })
           .on("mouseout", function(d) {
             d3.select(".group-campaign-text").remove();
