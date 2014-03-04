@@ -44,19 +44,28 @@ $(document).ready(function() {
       response = data;
       // grouping each of the bars
       var i = -1;
+      var campaignNames = [];
       response.forEach(function(d) {
         i++;
-        campaignNames = d3.keys(data[i]).filter(function(key) { return key !== "weekday"; });
-        d.days = campaignNames.map(function(name) {
-          // debugger
-          return {name: name, value: +d[name]};
+        campaignNames.push(d3.keys(data[i]).filter(function(key) { return key !== "weekday"; }) );
+        var ii = -1;
+        campaignNames.forEach(function(dd) {
+          ii ++;
+          response[i].days = campaignNames[ii].map(function(name) {
+            return {name: name, value: +response[i][name]};
+          });
         });
       });
-      
+
       // labels for x axis
       x0.domain(response.map(function(d) { return d.weekday; }));
-      // huh?
-      x1.domain(campaignNames).rangeRoundBands([0, x0.rangeBand()]);
+      // divide up the x axis bars
+      // var i = -1;
+      // campaignNames.forEach(function(d) {
+      //   i++;
+      //   x1.domain(campaignNames[i]).rangeRoundBands([0, x0.rangeBand()]);
+      // });
+      x1.domain(campaignNames).rangeRoundBands([-200, 600]);
       // set scale of y axis
       y.domain([0, d3.max(response, function(d) {
         return d3.max(d.days, function(d) { return d.value;})})]);
@@ -99,7 +108,7 @@ $(document).ready(function() {
                .attr("x", function() { return d.name; })
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
-               .text(function() { return d.name; });
+               .text(function() { return d.name + ", " + d.value; });
           })
           .on("mouseout", function(d) {
             d3.select(".group-campaign-text").remove();

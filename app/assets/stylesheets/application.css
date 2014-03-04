@@ -29,6 +29,9 @@
 .legend {
   margin-left: 20px;
 }
+.group-campaign-text {
+  fill: purple;
+}
 
 /* TABLES */
 table, th, td {
