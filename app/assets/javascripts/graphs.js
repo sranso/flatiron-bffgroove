@@ -2,9 +2,17 @@ var response;
 var yAxisInput;
 $(document).ready(function() {
 
-  // $(".dropdown a").click(function(e){
-    // e.preventDefault();
-    // yAxisInput = $(this).text();
+  $(".dropdown a").click(function(e){
+    e.preventDefault();
+    yAxisInputPretty = $(this).text();
+
+    function capitalize(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
+    yAxisInput = yAxisInputPretty.replace(" ", "_").toLowerCase();
+
+    $("h1.graphs").text("Group Campaigns by " + yAxisInputPretty);
 
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = 960 - margin.left - margin.right,
@@ -83,7 +91,7 @@ $(document).ready(function() {
           .attr("y", 6)
           .attr("dy", ".71em")
           .style("text-anchor", "end")
-          .text("revenue created"); // yAxisInput
+          .text(yAxisInputPretty);
 
       var weekdayX = svg.selectAll(".weekdayX")
           .data(response)
@@ -158,5 +166,5 @@ $(document).ready(function() {
       //     .style("text-anchor", "end")
       //     .text(function(d) { return d; });
     });
-  // });
+  });
 });
