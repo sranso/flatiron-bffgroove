@@ -21,9 +21,12 @@ class CampaignController < ApplicationController
 
   def graph
     @campaigns = Campaign.order(:send_date).reverse.first(200)
+    @weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    @yaxis = params[:yaxis]
+
     respond_to do |format|
       format.html
-      format.json {render "campaign/graph.json.rabl"}
+      format.json { render "campaign/graph.json.rabl" }
     end
   end
 

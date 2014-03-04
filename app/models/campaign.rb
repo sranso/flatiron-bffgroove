@@ -28,6 +28,7 @@ class Campaign < ActiveRecord::Base
         current_campaign[:total_bounces] = (campaign["summary"]["soft_bounces"] + campaign["summary"]["hard_bounces"])
       end
       current_campaign[:total_recipients] = campaign["emails_sent"] - current_campaign[:total_bounces]
+      current_campaign[:open_rate] = current_campaign[:unique_opens] / campaign["emails_sent"].to_f
       google_analytics_hash = google_analytics(current_campaign.unique_id)
       if google_analytics_hash.parsed_response != []
         current_campaign[:revenue_created] = google_analytics_hash["revenue"].to_f
@@ -44,7 +45,9 @@ class Campaign < ActiveRecord::Base
           val.each do |key2, val2|
             if key2 == "industry"
               val2.each do |key3, val3|
-                current_campaign.set_attributes(key3, val3)
+                if key3 != "open_rate"
+                  current_campaign.set_attributes(key3, val3)
+                end
               end
             else
               current_campaign.set_attributes(key2, val2)

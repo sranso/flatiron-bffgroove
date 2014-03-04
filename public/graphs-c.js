@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     yAxisInput = yAxisInputPretty.replace(" ", "_").toLowerCase();
 
-    $("h1.graphs").text("Group Campaigns by " + yAxisInputPretty);
+    $("h1.graphs").text("Campaigns by " + yAxisInputPretty);
 
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = 960 - margin.left - margin.right,
@@ -47,7 +47,7 @@ $(document).ready(function() {
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.json("/group_campaigns/graph/" + yAxisInput, function(error, data) {
+    d3.json("/campaigns/graph/" + yAxisInput + ".json", function(error, data) {
       // returns keys, makes them for side bar
       response = data;
       // grouping each of the bars
@@ -125,7 +125,15 @@ $(document).ready(function() {
                .attr("y", 60)
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
-               .text(function() { return "$" + d.value.toFixed(2); });
+               .text(function() {
+                if (yAxisInput == "revenue_created") {
+                  return "$" + d.value.toFixed(2); 
+                } else if (yAxisInput == "open_rate") {
+                  return d.value.toFixed(2) + "%";
+                } else {
+                  return d.value + " unsubscribes";
+                };
+              });
           })
           .on("mouseout", function(d) {
             d3.select(".group-campaign-text").remove();
@@ -145,7 +153,7 @@ $(document).ready(function() {
           .attr("x", 675)
           .attr("y", 10)
           .attr("dy", ".5em")
-          .html("Group Campaign Data");
+          .html("Campaign Data");
 
       // var legend = svg.selectAll(".legend")
       //     .data(campaignNames.slice().reverse())

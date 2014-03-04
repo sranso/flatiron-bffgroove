@@ -8,4 +8,3 @@ end
     group_campaign[@yaxis]
   end
 end
-

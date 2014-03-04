@@ -128,8 +128,11 @@ $(document).ready(function() {
                .text(function() {
                 if (yAxisInput == "revenue_created") {
                   return "$" + d.value.toFixed(2); 
+                } else if (yAxisInput == "unique_opens") {
+                  return d.value + " unique opens";
+                } else {
+                  return d.value + " unubscribes";
                 };
-                return d.value;
               });
           })
           .on("mouseout", function(d) {
