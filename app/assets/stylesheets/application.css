@@ -29,10 +29,10 @@
 .legend {
   margin-left: 20px;
 }
-.group-campaign-text {
-  fill: purple;
+.hovered-label {
+  font-size: 14px;
+  font-weight: bold;
 }
-
 /* TABLES */
 table, th, td {
   border: 1px solid black;

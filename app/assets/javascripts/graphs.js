@@ -109,10 +109,19 @@ $(document).ready(function() {
                .attr("y", 33)
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
-               .text(function() { return d.name + ", $" + d.value.toFixed(2); });
+               .text(function() { return d.name; }),
+            svg.append("text")
+               .attr("class", "other-group-campaign-text")
+               .attr("transform", function() { return "translate(" + x0(d.weekday) +",-10)"; })
+               .attr("x", 610)
+               .attr("y", 60)
+               .attr("dy", ".35em")
+               .style("text-anchor", function() { return x1(d.name); })
+               .text(function() { return "$" + d.value.toFixed(2); });
           })
           .on("mouseout", function(d) {
             d3.select(".group-campaign-text").remove();
+            d3.select(".other-group-campaign-text").remove();
           });
 
       svg.append("rect")
@@ -122,6 +131,13 @@ $(document).ready(function() {
           .attr("width", 300)
           .attr("fill", "rgba(255,255,255,0.8)")
           .attr("stroke", "#ccc");
+
+      svg.append("text")
+          .attr("class", "hovered-label")
+          .attr("x", 675)
+          .attr("y", 10)
+          .attr("dy", ".5em")
+          .html("Group Campaign Data");
 
       // var legend = svg.selectAll(".legend")
       //     .data(campaignNames.slice().reverse())
