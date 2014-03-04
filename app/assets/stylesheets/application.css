@@ -11,6 +11,7 @@
  *= require_self
  *= require jquery.handsontable.bootstrap
  *= require jquery.handsontable
+ *= require jquery_ujs
  */
 
  /* GRAPHS */
