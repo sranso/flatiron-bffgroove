@@ -77,7 +77,7 @@ $(document).ready(function() {
       if (xAxisInput == "Weekdays") {
         x1.domain(campaignNames).rangeRoundBands([-200, 600]);
       } else {
-        x1.domain(campaignNames).rangeRoundBands([-200, 350]);
+        x1.domain(campaignNames).rangeRoundBands([-200, 400]);
       };
       // set scale of y axis
       y.domain([0, d3.max(response, function(d) {
