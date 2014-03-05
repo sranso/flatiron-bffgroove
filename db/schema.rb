@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140225172312) do
+ActiveRecord::Schema.define(:version => 20140304215337) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "title"
@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(:version => 20140225172312) do
     t.integer  "new_visits"
     t.float    "pagesvisit"
     t.decimal  "bounce_rate"
-    t.time     "time_on_site"
     t.decimal  "goal_conversion_rate"
     t.decimal  "per_visit_goal_value"
     t.integer  "transactions"

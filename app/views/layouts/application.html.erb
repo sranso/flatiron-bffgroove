@@ -3,7 +3,6 @@
 <head>
   <title>Petflow</title>
   <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.css" />
   <script src="http://handsontable.com/lib/jquery.min.js"></script>
   <script src="http://handsontable.com/dist/jquery.handsontable.full.js"></script> 
   <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
@@ -23,15 +22,29 @@
 
         <!-- Left Nav Section -->
         <ul class="nav navbar-nav">
-          <li><a href="/campaigns">Campaigns</a></li>
-          <li><a href="/group_campaigns">Group Campaigns</a></li>
+          <li><a href="/campaigns" class="dropdown-toggle" data-toggle="dropdown">Campaigns <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="/campaigns/">Table</a></li>
+              <li><a href="/campaigns/graphs">Graph</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="/group_campaigns" class="dropdown-toggle" data-toggle="dropdown">Group Campaigns <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="/group_campaigns/">Table</a></li>
+              <li><a href="/group_campaigns/graphs">Graph</a></li>
+            </ul>
+          </li>
         </ul>
         
         <!-- Right Nav Section --> 
        
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
-            <li><a href="/users/sign_out" data-method="DELETE">Sign Out</a></li>
+
+            <li>
+              <%= link_to("Sign Out", destroy_user_session_path, method: :delete) %>
+            </li>
           <% else %>
             <li><a href="/users/sign_in">Sign In</a></li>
           <% end %>

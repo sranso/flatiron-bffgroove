@@ -125,12 +125,8 @@ $(document).ready(function() {
     type: 'GET', 
     success: function(data){
       var dataResponse = data; 
-      var keysGroupCampaigns = []; 
+      var keysGroupCampaigns = ["TITLE", "SEND DATE"]; 
 
-      for (var k in dataResponse[0]){
-        kNew = replaceAll("_", " ", k).toUpperCase(); 
-        keysGroupCampaigns.push(kNew);
-      }
       makeGroupCampaignsTable(".tableGroupCampaigns", dataResponse, keysGroupCampaigns);
       makeSortable(".tableGroupCampaigns");
     }, 

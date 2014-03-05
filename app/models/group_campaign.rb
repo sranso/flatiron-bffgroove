@@ -21,6 +21,7 @@ class GroupCampaign < ActiveRecord::Base
 
   def calculate_send_date
     self.send_date = self.campaigns.order(:send_date)[0].send_date
+    self.send_weekday = self.campaigns.order(:send_date)[0].send_weekday
   end
 
   def self.to_csv

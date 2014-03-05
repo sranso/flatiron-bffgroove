@@ -1,5 +1,4 @@
-every 1.hours do
-  rake "download"
+RAILS_ROOT = File.dirname(__FILE__) + '/..'
+every 6.hours do
   rake "import"
-  command "rm -rf #{RAILS_ROOT}/main.csv"
 end
