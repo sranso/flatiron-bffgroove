@@ -74,7 +74,11 @@ $(document).ready(function() {
       // labels for x axis
       x0.domain(response.map(function(d) { return d.variable; }));
       // divide up the x axis bars
-      x1.domain(campaignNames).rangeRoundBands([-200, 350]); // -200, 350 for times, -200, 600 for days... 
+      if (xAxisInput == "Weekdays") {
+        x1.domain(campaignNames).rangeRoundBands([-200, 600]);
+      } else {
+        x1.domain(campaignNames).rangeRoundBands([-200, 350]);
+      };
       // set scale of y axis
       y.domain([0, d3.max(response, function(d) {
         return d3.max(d.days, function(d) { return d.value;})})]);
