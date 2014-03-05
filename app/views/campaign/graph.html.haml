@@ -1,4 +1,5 @@
-.row
+.row.inline-dropdown-wrapper
+  .inline-dropdown-text Make a bar chart! First...
   %script{:src=>"../graphs-c.js", :type=>"text/javascript"}
   %div{:class=>"dropdown inline-dropdown xaxis"}
     %button{:class=>"btn dropdown-toggle", :type=>"button", :id=> "dropdownMenu1", :data=>{:toggle=>"dropdown"}} Choose Your X Axis
@@ -8,6 +9,7 @@
       %li{:role=>"presentation"} 
         %a{:role=>"menuitem", :tabindex=>"-1", :href=>"#"} Times
 
+  .inline-dropdown-text and then...
   %script{:src=>"../graphs-c.js", :type=>"text/javascript"}
   %div{:class=>"dropdown inline-dropdown yaxis"}
     %button{:class=>"btn dropdown-toggle", :type=>"button", :id=> "dropdownMenu1", :data=>{:toggle=>"dropdown"}} Choose Your Y Axis

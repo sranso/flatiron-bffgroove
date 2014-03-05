@@ -13,6 +13,9 @@
  *= require jquery.handsontable
  */
 
+body {
+  background-color: rgba(176,234,252,0.5);
+}
  /* GRAPHS */
 .axis path,
 .axis line {
@@ -36,9 +39,22 @@
 h1.graphs, h3.graphs {
   text-align: center;
 }
-.inline-dropdown {
+.inline-dropdown, .inline-dropdown-text {
   margin: 0 auto;
   display: inline-block;
+  font-size: 18px;
+}
+.inline-dropdown-wrapper {
+  height: 50px;
+  padding: 10px;
+  width: 700px;
+  margin: 0 auto;
+}
+.smaller-width {
+  width: 400px;
+}
+.svg {
+  background-color: white;
 }
 /* TABLES */
 table, th, td {
