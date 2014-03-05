@@ -1,14 +1,23 @@
-%script{:src=>"../graphs-c.js", :type=>"text/javascript"}
-%div{:class=>"dropdown"}
-  %button{:class=>"btn dropdown-toggle", :type=>"button", :id=> "dropdownMenu1", :data=>{:toggle=>"dropdown"}} Choose Your Variable
-  %ul{:class=>"dropdown-menu", :role=>"menu"} 
-    %li{:class=>"dropdown-header", :role=>"presentation"} Y-Axis
-    %li{:role=>"presentation"}
-      %a{:role=>"menuitem", :tabindex=>"-1", :href=>"#"} Open Rate
-    %li{:role=>"presentation"} 
-      %a{:role=>"menuitem", :tabindex=>"-1", :href=>"#"} Revenue Created
-    %li{:role=>"presentation"} 
-      %a{:role=>"menuitem", :tabindex=>"-1", :href=>"#"} Unsubscribes
+.row
+  %script{:src=>"../graphs-c.js", :type=>"text/javascript"}
+  %div{:class=>"dropdown inline-dropdown xaxis"}
+    %button{:class=>"btn dropdown-toggle", :type=>"button", :id=> "dropdownMenu1", :data=>{:toggle=>"dropdown"}} Choose Your X Axis
+    %ul{:class=>"dropdown-menu", :role=>"menu"} 
+      %li{:role=>"presentation"}
+        %a{:role=>"menuitem", :tabindex=>"-1", :href=>"#"} Weekdays
+      %li{:role=>"presentation"} 
+        %a{:role=>"menuitem", :tabindex=>"-1", :href=>"#"} Times
+
+  %script{:src=>"../graphs-c.js", :type=>"text/javascript"}
+  %div{:class=>"dropdown inline-dropdown yaxis"}
+    %button{:class=>"btn dropdown-toggle", :type=>"button", :id=> "dropdownMenu1", :data=>{:toggle=>"dropdown"}} Choose Your Y Axis
+    %ul{:class=>"dropdown-menu", :role=>"menu"} 
+      %li{:role=>"presentation"}
+        %a{:role=>"menuitem", :tabindex=>"-1", :href=>"#"} Open Rate
+      %li{:role=>"presentation"} 
+        %a{:role=>"menuitem", :tabindex=>"-1", :href=>"#"} Revenue Created
+      %li{:role=>"presentation"} 
+        %a{:role=>"menuitem", :tabindex=>"-1", :href=>"#"} Unsubscribes
 %h1.graphs
 %h3.graphs
 .svg

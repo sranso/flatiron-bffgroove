@@ -20,8 +20,13 @@ class CampaignController < ApplicationController
   end
 
   def graph
-    @weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    @times = ["9AM - 10AM", "11AM - 12PM", "1PM - 2PM", "3PM - 4PM", "5PM - 6PM", "7PM - 8PM"]
+    if params[:xaxis] == "Weekdays"
+      @xaxis = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      @rabl = "campaign/graph-weekdays.json.rabl"
+    else
+      @xaxis = ["9AM - 10AM", "11AM - 12PM", "1PM - 2PM", "3PM - 4PM", "5PM - 6PM", "7PM - 8PM"]
+      @rabl = "campaign/graph-times.json.rabl"
+    end
     @yaxis = params[:yaxis]
     @sorted_campaigns = []
     @campaigns = Campaign.order(:send_date).reverse.first(120) # this isn't a certain number of days
@@ -31,7 +36,7 @@ class CampaignController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render "campaign/graph.json.rabl" }
+      format.json { render @rabl }
     end
   end
 
