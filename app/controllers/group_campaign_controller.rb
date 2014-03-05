@@ -30,7 +30,7 @@ class GroupCampaignController < ApplicationController
     @sorted_final = []
 
     @group_campaigns.each do |group_campaign|
-      @sorted_final = (sorted_temp << group_campaign[@yaxis]).sort.reverse
+      @sorted_final = (sorted_temp << group_campaign[@yaxis].to_f).sort.reverse
     end
 
     respond_to do |format|

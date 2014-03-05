@@ -24,11 +24,11 @@ class Campaign < ActiveRecord::Base
         current_campaign[:times_forwarded] = campaign["summary"]["forwards"]
         current_campaign[:total_opens] = campaign["summary"]["opens"]
         current_campaign[:total_clicks] = campaign["summary"]["clicks"]
+        current_campaign[:open_rate] = campaign["summary"]["unique_opens"] / campaign["emails_sent"].to_f
         current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
         current_campaign[:total_bounces] = (campaign["summary"]["soft_bounces"] + campaign["summary"]["hard_bounces"])
       end
       current_campaign[:total_recipients] = campaign["emails_sent"] - current_campaign[:total_bounces]
-      current_campaign[:open_rate] = current_campaign[:unique_opens] / campaign["emails_sent"].to_f
       google_analytics_hash = google_analytics(current_campaign.unique_id)
       if google_analytics_hash.parsed_response != []
         current_campaign[:revenue_created] = google_analytics_hash["revenue"].to_f
@@ -64,6 +64,7 @@ class Campaign < ActiveRecord::Base
       current_campaign.calculate_successful_deliveries
       current_campaign.save!
       current_campaign.set_send_day
+      current_campaign[:send_date].in_time_zone("Eastern Time (US & Canada)")
     end
   end
 

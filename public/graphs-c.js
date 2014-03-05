@@ -53,7 +53,7 @@ $(document).ready(function() {
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.json("/campaigns/graph/xaxis=" + xAxisInput + "&yaxis=" + yAxisInput + ".json", function(error, data) {
+    d3.json("/campaigns/graph/" + xAxisInput + "/" + yAxisInput + ".json", function(error, data) {
       // returns keys, makes them for side bar
       response = data;
       // grouping each of the bars
@@ -108,7 +108,7 @@ $(document).ready(function() {
           .data(function(d) { return d.days; })
         .enter().append("rect")
           .attr("width", x1.rangeBand())
-          .attr("x", function(d) { return x1(d.name); })
+          .attr("x", function(d) { return undefined; })
           .attr("y", function(d) { return y(d.value); })
           .attr("height", function(d) { return height - y(d.value); })
           .attr("class", "group-campaign")
