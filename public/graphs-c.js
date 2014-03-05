@@ -13,6 +13,7 @@ $(document).ready(function() {
     yAxisInput = yAxisInputPretty.replace(" ", "_").toLowerCase();
 
     $("h1.graphs").text("Campaigns by " + yAxisInputPretty);
+    $("h3.graphs").text("(over approx. 30-day period)");
 
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = 960 - margin.left - margin.right,
@@ -66,14 +67,9 @@ $(document).ready(function() {
       });
 
       // labels for x axis
-      x0.domain(response.map(function(d) { return d.weekday; }));
+      x0.domain(response.map(function(d) { return d.variable; }));
       // divide up the x axis bars
-      // var i = -1;
-      // campaignNames.forEach(function(d) {
-      //   i++;
-      //   x1.domain(campaignNames[i]).rangeRoundBands([0, x0.rangeBand()]);
-      // });
-      x1.domain(campaignNames).rangeRoundBands([-200, 600]);
+      x1.domain(campaignNames).rangeRoundBands([-200, 350]); // -200, 350 for times, -200, 600 for days... 
       // set scale of y axis
       y.domain([0, d3.max(response, function(d) {
         return d3.max(d.days, function(d) { return d.value;})})]);
@@ -97,7 +93,7 @@ $(document).ready(function() {
           .data(response)
         .enter().append("g")
           .attr("class", "g")
-          .attr("transform", function(d) { return "translate(" + x0(d.weekday) + ",0)"; });
+          .attr("transform", function(d) { return "translate(" + x0(d.variable) + ",0)"; });
 
       weekdayX.selectAll("rect")
           .data(function(d) { return d.days; })
@@ -112,22 +108,22 @@ $(document).ready(function() {
             d3.select()
             svg.append("text")
                .attr("class", "group-campaign-text")
-               .attr("transform", function() { return "translate(" + x0(d.weekday) +",-10)"; })
+               .attr("transform", function() { return "translate(" + x0(d.variable) +",-10)"; })
                .attr("x", 610)
                .attr("y", 33)
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
-               .text(function() { return d.name; }),
+               .html(function() { return "&ldquo;" + d.name + "&rdquo;"; }),
             svg.append("text")
                .attr("class", "other-group-campaign-text")
-               .attr("transform", function() { return "translate(" + x0(d.weekday) +",-10)"; })
+               .attr("transform", function() { return "translate(" + x0(d.variable) +",-10)"; })
                .attr("x", 610)
                .attr("y", 60)
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
                .text(function() {
                 if (yAxisInput == "revenue_created") {
-                  return "$" + d.value.toFixed(2); 
+                  return "$" + d.value.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
                 } else if (yAxisInput == "open_rate") {
                   return d.value.toFixed(2) + "%";
                 } else {

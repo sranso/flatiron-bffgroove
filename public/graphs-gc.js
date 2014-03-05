@@ -13,6 +13,7 @@ $(document).ready(function() {
     yAxisInput = yAxisInputPretty.replace(" ", "_").toLowerCase();
 
     $("h1.graphs").text("Group Campaigns by " + yAxisInputPretty);
+    $("h3.graphs").text("(over approx. 30-day period)");
 
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = 960 - margin.left - margin.right,
@@ -66,13 +67,10 @@ $(document).ready(function() {
       });
 
       // labels for x axis
-      x0.domain(response.map(function(d) { return d.weekday; }));
+      x0.domain(response.map(function(d) {
+        return d.weekday;
+      }));
       // divide up the x axis bars
-      // var i = -1;
-      // campaignNames.forEach(function(d) {
-      //   i++;
-      //   x1.domain(campaignNames[i]).rangeRoundBands([0, x0.rangeBand()]);
-      // });
       x1.domain(campaignNames).rangeRoundBands([-200, 600]);
       // set scale of y axis
       y.domain([0, d3.max(response, function(d) {
@@ -117,7 +115,7 @@ $(document).ready(function() {
                .attr("y", 33)
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
-               .text(function() { return d.name; }),
+               .html(function() { return "&ldquo;" + d.name + "&rdquo;"; }),
             svg.append("text")
                .attr("class", "other-group-campaign-text")
                .attr("transform", function() { return "translate(" + x0(d.weekday) +",-10)"; })
@@ -127,11 +125,11 @@ $(document).ready(function() {
                .style("text-anchor", function() { return x1(d.name); })
                .text(function() {
                 if (yAxisInput == "revenue_created") {
-                  return "$" + d.value.toFixed(2); 
+                  return "$" + d.value.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");; 
                 } else if (yAxisInput == "unique_opens") {
-                  return d.value + " unique opens";
+                  return d.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " unique opens";
                 } else {
-                  return d.value + " unubscribes";
+                  return d.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " unubscribes";
                 };
               });
           })

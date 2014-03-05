@@ -21,6 +21,7 @@ class CampaignController < ApplicationController
 
   def graph
     @weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    @times = ["9AM - 10AM", "11AM - 12PM", "1PM - 2PM", "3PM - 4PM", "5PM - 6PM", "7PM - 8PM"]
     @yaxis = params[:yaxis]
     @sorted_campaigns = []
     @campaigns = Campaign.order(:send_date).reverse.first(120) # this isn't a certain number of days
