@@ -3,6 +3,6 @@
 %a{:href=>"#{@group_campaign.id}.csv"}
   %img.csv{:src=>"/csv.svg"}
 .tableGroupCampaign
-%a.btn.btn-primary.show_button{:method => "get"} Show Campaigns
+%a.btn.btn-primary.show_button.fade.in{:method => "get"} Show Campaigns
 .tableGCCampaigns.hide_table
 %input.group_campaign_id{:type => "hidden", :name => "group_campaign_id", :value => "#{@group_campaign.id}"}
