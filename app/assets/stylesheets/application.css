@@ -45,13 +45,16 @@ h1.graphs, h3.graphs {
   height: 50px;
   padding: 10px;
   width: 700px;
-  margin: -40px auto;
+  margin: -40px auto 0 auto;
 }
 .smaller-width {
   width: 400px;
 }
 .svg {
   background-color: white;
+}
+.dragdealer.vertical {
+  left: 0px;
 }
 /* TABLES */
 table, th, td {
@@ -63,11 +66,11 @@ table, th, td {
 .tableCampaigns {
   height: 600px;
   overflow: scroll;
-  width: 700px;
+  width: 960px;
   margin-top: 20px;
 }
 .tableGroupCampaigns.handsontable {
-  width: 753px;
+  width: 410px;
 }
 .tableGroupCampaigns{
   height: 600px;
@@ -95,6 +98,16 @@ table, th, td {
 }
 #datepicker {
   margin-bottom: 20px;
+}
+.ui-widget-header {
+  border: 1px solid #dddddd;
+  background: #f6f6f6 url(images/ui-bg_highlight-soft_100_f6f6f6_1x100.png) 50% 50% repeat-x;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+border: 0px;
+background: white;
+font-weight: bold;
+color: #0073ea;
 }
 /* OTHER */
 .hide-me {
