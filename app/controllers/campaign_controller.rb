@@ -19,4 +19,30 @@ class CampaignController < ApplicationController
     end
   end
 
+  def graph
+    # debugger
+    if params[:xaxis] == "Weekdays"
+      @xaxis = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      @rabl = "campaign/graph-weekdays.json.rabl"
+    elsif params[:xaxis] == "Times"
+      @xaxis = ["9AM - 10AM", "11AM - 12PM", "1PM - 2PM", "3PM - 4PM", "5PM - 6PM", "7PM - 8PM"]
+      @rabl = "campaign/graph-times.json.rabl"
+    end
+    @yaxis = params[:yaxis]
+    @campaigns = Campaign.order(:send_date).reverse.first(120) # this isn't a certain number of days
+    # @campaigns = Campaign.date_range(params[:from], params[:to])
+
+    sorted_temp = []
+    @sorted_final = []
+
+    @campaigns.each do |campaign|
+      @sorted_final = (sorted_temp << campaign[@yaxis].to_f).sort.reverse
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render @rabl }
+    end
+  end
+
 end

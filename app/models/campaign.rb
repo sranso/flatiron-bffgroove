@@ -1,6 +1,6 @@
 class Campaign < ActiveRecord::Base
   include ActiveModel::Serializers::JSON
-  attr_accessible :title, :subject, :list_id, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :unique_id, :analytics_roi, :campaign_cost, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :time_on_site, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :group_campaign_id, :folder_id
+  attr_accessible :title, :subject, :list_id, :send_date, :send_weekday, :total_recipients, :successful_deliveries, :soft_bounces, :hard_bounces, :total_bounces, :times_forwarded, :forwarded_opens, :unique_opens, :open_rate, :total_opens, :unique_clicks, :click_rate, :total_clicks, :unsubscribes,:abuse_complaints, :unique_id, :analytics_roi, :campaign_cost, :revenue_created, :visits, :new_visits, :pagesvisit, :bounce_rate, :goal_conversion_rate, :per_visit_goal_value, :transactions, :ecommerce_conversion_rate, :per_visit_value, :average_value, :group_campaign_id, :folder_id
   has_one :group_campaign
   belongs_to :list
   attr_reader :api
@@ -24,6 +24,7 @@ class Campaign < ActiveRecord::Base
         current_campaign[:times_forwarded] = campaign["summary"]["forwards"]
         current_campaign[:total_opens] = campaign["summary"]["opens"]
         current_campaign[:total_clicks] = campaign["summary"]["clicks"]
+        current_campaign[:open_rate] = campaign["summary"]["unique_opens"] / campaign["emails_sent"].to_f
         current_campaign[:abuse_complaints] = campaign["summary"]["abuse_reports"]
         current_campaign[:total_bounces] = (campaign["summary"]["soft_bounces"] + campaign["summary"]["hard_bounces"])
       end
@@ -44,7 +45,9 @@ class Campaign < ActiveRecord::Base
           val.each do |key2, val2|
             if key2 == "industry"
               val2.each do |key3, val3|
-                current_campaign.set_attributes(key3, val3)
+                if key3 != "open_rate"
+                  current_campaign.set_attributes(key3, val3)
+                end
               end
             else
               current_campaign.set_attributes(key2, val2)
@@ -61,6 +64,7 @@ class Campaign < ActiveRecord::Base
       current_campaign.calculate_successful_deliveries
       current_campaign.save!
       current_campaign.set_send_day
+      current_campaign[:send_date].in_time_zone("Eastern Time (US & Canada)")
     end
   end
 
