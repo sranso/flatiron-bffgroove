@@ -150,7 +150,7 @@ $(document).ready(function() {
 
       svg.append("text")
           .attr("class", "hovered-label")
-          .attr("x", 675)
+          .attr("x", 690)
           .attr("y", 10)
           .attr("dy", ".5em")
           .html("Campaign Data");

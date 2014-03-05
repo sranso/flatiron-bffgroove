@@ -20,9 +20,13 @@ class CampaignController < ApplicationController
   end
 
   def graph
-    @campaigns = Campaign.order(:send_date).reverse.first(200)
     @weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     @yaxis = params[:yaxis]
+    @sorted_campaigns = []
+    @campaigns = Campaign.order(:send_date).reverse.first(120) # this isn't a certain number of days
+    @campaigns.each do |campaign|
+      @sorted_campaigns << campaign
+    end
 
     respond_to do |format|
       format.html

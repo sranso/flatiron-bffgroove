@@ -22,7 +22,7 @@ class GroupCampaignController < ApplicationController
   end
 
   def graph
-    @group_campaigns = GroupCampaign.order(:send_date).reverse
+    @group_campaigns = GroupCampaign.order(:send_date).reverse.first(30) # this isn't a certain number of days
     @weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     @yaxis = params[:yaxis]
 
