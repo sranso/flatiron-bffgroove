@@ -101,7 +101,7 @@ $(document).ready(function() {
           .data(function(d) { return d.days; })
         .enter().append("rect")
           .attr("width", x1.rangeBand())
-          .attr("x", function(d) { return x1(d.name); })
+          .attr("x", function(d) { return undefined; })
           .attr("y", function(d) { return y(d.value); })
           .attr("height", function(d) { return height - y(d.value); })
           .attr("class", "group-campaign")
