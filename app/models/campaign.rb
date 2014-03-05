@@ -62,6 +62,7 @@ class Campaign < ActiveRecord::Base
         end
       end
       current_campaign.calculate_successful_deliveries
+      current_campaign.calculate_click_rate
       current_campaign.save!
       current_campaign.set_send_day
       current_campaign[:send_date].in_time_zone("Eastern Time (US & Canada)")
@@ -86,7 +87,13 @@ class Campaign < ActiveRecord::Base
 
   def calculate_successful_deliveries
     self[:successful_deliveries] = (self[:total_recipients] - self[:total_bounces])
+    self.save!
   end
+
+  def calculate_click_rate 
+    self[:click_rate] = (self[:total_clicks].to_f/self[:successful_deliveries])*100
+    self.save!
+  end 
 
   def self.group_campaigns
     self.all.each do |campaign|
