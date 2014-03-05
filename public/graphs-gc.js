@@ -91,13 +91,13 @@ $(document).ready(function() {
           .style("text-anchor", "end")
           .text(yAxisInputPretty);
 
-      var weekdayX = svg.selectAll(".weekdayX")
+      var xAxisVar = svg.selectAll(".xAxisVar")
           .data(response)
         .enter().append("g")
           .attr("class", "g")
           .attr("transform", function(d) { return "translate(" + x0(d.weekday) + ",0)"; });
 
-      weekdayX.selectAll("rect")
+      xAxisVar.selectAll("rect")
           .data(function(d) { return d.days; })
         .enter().append("rect")
           .attr("width", x1.rangeBand())
@@ -111,16 +111,16 @@ $(document).ready(function() {
             svg.append("text")
                .attr("class", "group-campaign-text")
                .attr("transform", function() { return "translate(" + x0(d.weekday) +",-10)"; })
-               .attr("x", 610)
-               .attr("y", 33)
+               .attr("x", 630)
+               .attr("y", 60)
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
                .html(function() { return "&ldquo;" + d.name + "&rdquo;"; }),
             svg.append("text")
                .attr("class", "other-group-campaign-text")
                .attr("transform", function() { return "translate(" + x0(d.weekday) +",-10)"; })
-               .attr("x", 610)
-               .attr("y", 60)
+               .attr("x", 630)
+               .attr("y", 80)
                .attr("dy", ".35em")
                .style("text-anchor", function() { return x1(d.name); })
                .text(function() {
@@ -143,34 +143,16 @@ $(document).ready(function() {
           .attr("y", 20)
           .attr("height", 100)
           .attr("width", 300)
-          .attr("fill", "rgba(255,255,255,0.8)")
+          .attr("fill", "rgba(255,255,255,0.9)")
           .attr("stroke", "#ccc");
 
       svg.append("text")
           .attr("class", "hovered-label")
           .attr("x", 675)
-          .attr("y", 10)
+          .attr("y", 30)
           .attr("dy", ".5em")
           .html("Group Campaign Data");
 
-      // var legend = svg.selectAll(".legend")
-      //     .data(campaignNames.slice().reverse())
-      //   .enter().append("g")
-      //     .attr("class", "legend")
-      //     .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
-      // legend.append("rect")
-      //     .attr("x", width - 18)
-      //     .attr("width", 18)
-      //     .attr("height", 18)
-      //     .style("fill", color);
-
-      // legend.append("text")
-      //     .attr("x", width - 24)
-      //     .attr("y", 9)
-      //     .attr("dy", ".35em")
-      //     .style("text-anchor", "end")
-      //     .text(function(d) { return d; });
     });
   });
 });
