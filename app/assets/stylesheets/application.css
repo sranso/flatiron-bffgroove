@@ -42,7 +42,7 @@ h1.graphs, h3.graphs, h1.home {
 }
 h1.home {
   color: white;
-  padding-top: 150px;
+  padding-top: 70px;
 }
 .btn.home {
   margin-top: 30px;
@@ -159,4 +159,7 @@ color: #0073ea;
   background-color: rgba(0, 0, 0, 0.3);
   margin-top: 50px;
   height: 330px;
+}
+.modal-dialog {
+  margin-top: 180px;
 }

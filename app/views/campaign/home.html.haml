@@ -15,11 +15,19 @@
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
             \&times;
           %h4#myModalLabel.modal-title
-            This Modal title
+            Welcome to your email data analytics hot spot!
         .modal-body
-          Add some text here
+          Here you can view data regarding the emails you send to your pet-loving clients. All the info you see comes straight from MailChimp's API, and also includes Google Analytics. No more back-and-forth between interfaces. It's all here.
+          <br></br>
+          Data is broken up by <a href="/campaigns/">Campaign</a> (a single email) or <a href="/group_campaigns/">Group Campaign</a> (a collection of "the same" email you sent to many lists).
+          <br></br>
+          You have many options on how to view the data:
+          %ol
+            %li Browse it all in a table. Here you can sort by column, scroll, and choose a date range.
+            %li Download a CSV.
+            %li Compare specific attributes of your choosing in a bar chart.
         .modal-footer
-          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}
-            Close
-          %button.btn.btn-primary{:type => "button"}
-            Submit changes
+          <em>Want to go to the data source? Time to send another email? <a href="http://mailchimp.com/">Head over to MailChimp.</a></em>
+          <br></br>
+          %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"}
+            Let's do this!
