@@ -94,7 +94,7 @@ table, th, td {
 }
 .center-me {
   margin: 0 auto;
-  width: 60%;
+  /*width: 60%;*/
 }
 .csv-h1 {
   display: inline-block;
