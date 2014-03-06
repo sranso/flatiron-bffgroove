@@ -92,6 +92,9 @@ table, th, td {
   width: inherit;
   margin: 20px 0px 50px 100px;
 }
+.tableGroupCampaign {
+  margin: 15px auto 10px auto;
+}
 .large-1.columns {
   color: white;
 }
@@ -117,6 +120,10 @@ table, th, td {
 }
 .hide_table {
   opacity: 0;
+}
+.show-campaigns-wrapper {
+  margin: 0 auto;
+  width: 138px;
 }
 .show_button{
   margin: 20px auto;
