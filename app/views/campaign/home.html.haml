@@ -2,7 +2,7 @@
   .home-border-wrapper
     .home-border-fill
       .home-border
-        %h1.home Hi Petflow!
+        %h1.home Hi Company!
         / Button trigger modal
         .home-btn-wrapper
           %button.btn.btn-primary.btn-lg.home{"data-target" => "#myModal", "data-toggle" => "modal"}
@@ -17,7 +17,7 @@
           %h4#myModalLabel.modal-title
             Welcome to your email data analytics hot spot!
         .modal-body
-          Here you can view data regarding the emails you send to your pet-loving clients. All the info you see comes straight from MailChimp's API, and also includes Google Analytics. No more back-and-forth between interfaces. It's all here.
+          Here you can view data regarding the emails you send to your pet-loving clients. All the info you see comes straight from MailChimp's API, and also includes Google Analytics. No more back-and-forth between interfaces. All the info you want is all here.
           <br></br>
           Data is broken up by <a href="/campaigns/">Campaign</a> (a single email) or <a href="/group_campaigns/">Group Campaign</a> (a collection of "the same" email you sent to many lists).
           <br></br>
@@ -25,8 +25,9 @@
           %ol
             %li Browse it all in a table. Here you can sort by column, scroll, and choose a date range.
             %li Download a CSV.
-            %li Look at a specific group campaign and its individual campaigns.
-            %li Compare specific attributes of your choosing in a bar chart.
+            %li Look at a specific group campaign and its individual campaigns in separate tables.
+            %li Compare specific attributes of your choosing and visualize them in a bar chart.
+          Click on <a href="/campaigns/">Campaigns</a> or <a href="/group_campaigns/">Group Campaigns</a> in the nav bar to get started.
         .modal-footer
           <em>Want to go to the data source? Time to send another email? <a href="http://mailchimp.com/">Head over to MailChimp.</a></em>
           <br></br>
