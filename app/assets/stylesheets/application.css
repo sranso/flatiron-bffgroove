@@ -34,7 +34,7 @@
   font-weight: bold;
 }
 h1 {
-  margin-top: -70px;
+  margin-top: -50px;
 }
 h1.graphs, h3.graphs, h1.home {
   text-align: center;
@@ -96,23 +96,24 @@ table, th, td {
   color: white;
 }
 .center-me {
-  margin: 0 auto;
+  margin: -20px auto 0 auto;
   width: 600px;
 }
 .csv-h1 {
   display: inline-block;
-  margin-top: -40px;
-  margin-left: 99px;
+  margin-top: 0px;
 }
 .csv-container {
   margin-top: -30px;
-  margin-left: 70px;
 }
 .csv {
   height: 25px;
   display: inline-block;
   margin-left: 20px;
   margin-bottom: 14px;
+}
+.all-c {
+  margin-left: 99px;
 }
 .hide_table {
   opacity: 0;
