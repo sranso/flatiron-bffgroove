@@ -63,6 +63,8 @@ h1.home {
 }
 .svg {
   background-color: white;
+  margin-bottom: 50px;
+  margin-left: 20px;
 }
 .dragdealer.vertical {
   left: 0px;
@@ -94,10 +96,14 @@ table, th, td {
 }
 .center-me {
   margin: 0 auto;
-  width: 60%;
+  width: 600px;
 }
 .csv-h1 {
   display: inline-block;
+  margin-top: 0px;
+}
+.csv-container {
+  margin-top: -10px;
 }
 .csv {
   height: 25px;
@@ -113,6 +119,7 @@ table, th, td {
 }
 #datepicker {
   margin-bottom: 20px;
+  padding-top: 10px;
 }
 .ui-widget-header {
   border: 1px solid #dddddd;
