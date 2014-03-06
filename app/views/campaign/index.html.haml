@@ -1,9 +1,8 @@
-.container
-  .center-me
-    %h1{:class => "csv-h1 "} This is your CSV
-    %a.csv-link{:href=>"/campaigns.csv"}
-      %img.csv{:src=>"/csv.svg"}
-    %h1{:class => "csv-h1 btn"}
-      = render 'campaign/dateform'
-    .tableCampaigns
-    .tableDateCampaigns
+
+%h1{:class => "csv-h1 "} This is your CSV
+%a.csv-link{:href=>"/campaigns.csv"}
+  %img.csv{:src=>"/csv.svg"}
+%h1{:class => "csv-h1 btn"}
+  = render 'campaign/dateform'
+.tableCampaigns
+.tableDateCampaigns
