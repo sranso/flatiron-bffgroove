@@ -2,8 +2,13 @@ var response;
 var yAxisInput;
 $(document).ready(function() {
 
+  $(".row.inline-dropdown-wrapper.smaller-width").on("mouseover", function(e){
+    $(this).fadeTo("fast" , 1);
+  });
+
   $(".dropdown a").click(function(e){
     e.preventDefault();
+    $(".row.inline-dropdown-wrapper.smaller-width").fadeTo("slow" , 0.5);
     yAxisInputPretty = $(this).text();
 
     function capitalize(string) {

@@ -2,6 +2,10 @@ var response;
 var yAxisInput;
 $(document).ready(function() {
 
+  $(".row.inline-dropdown-wrapper").on("mouseover", function(e){
+    $(this).fadeTo("fast", 1);
+  });
+
   $(".xaxis a").click(function(e){
     e.preventDefault();
     xAxisInput = $(this).text();
@@ -9,6 +13,7 @@ $(document).ready(function() {
 
   $(".yaxis a").click(function(e){
     e.preventDefault();
+    $(".row.inline-dropdown-wrapper").fadeTo("slow" , 0.5);
     yAxisInputPretty = $(this).text();
 
     function capitalize(string) {
