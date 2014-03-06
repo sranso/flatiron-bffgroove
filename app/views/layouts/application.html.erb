@@ -22,7 +22,7 @@
 
         <!-- Left Nav Section -->
         <ul class="nav navbar-nav">
-          <li><a href="/campaigns" class="dropdown-toggle" data-toggle="dropdown">Campaigns <b class="caret"></b></a>
+          <li class="active"><a href="/campaigns" class="dropdown-toggle" data-toggle="dropdown">Campaigns <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="/campaigns/">Table</a></li>
               <li><a href="/campaigns/graphs">Graph</a></li>
@@ -41,7 +41,6 @@
        
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
-
             <li>
               <%= link_to("Sign Out", destroy_user_session_path, method: :delete) %>
             </li>
@@ -53,8 +52,6 @@
   </nav>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-  <div class="container">
-    <%= yield %>
-  </div>
+  <%= yield %>
 </body>
 </html>

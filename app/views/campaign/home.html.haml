@@ -1,7 +1,25 @@
-.row
-  .large-1.columns
-    .hide-me Hi
-  .large-10.columns
-    %h1 Hi Petflow!
-    %img{src:"http://placekitten.com/g/960/1000"}
-  .large-1.columns
+.placekitten
+  .home-border-wrapper
+    .home-border-fill
+      .home-border
+        %h1.home Hi Petflow!
+        / Button trigger modal
+        .home-btn-wrapper
+          %button.btn.btn-primary.btn-lg.home{"data-target" => "#myModal", "data-toggle" => "modal"}
+            Get Started
+  / Modal
+  #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
+            \&times;
+          %h4#myModalLabel.modal-title
+            This Modal title
+        .modal-body
+          Add some text here
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}
+            Close
+          %button.btn.btn-primary{:type => "button"}
+            Submit changes

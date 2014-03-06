@@ -33,8 +33,19 @@
   font-size: 14px;
   font-weight: bold;
 }
-h1.graphs, h3.graphs {
+h1 {
+  margin-top: -50px;
+}
+h1.graphs, h3.graphs, h1.home {
   text-align: center;
+  margin-top: 30px;
+}
+h1.home {
+  color: white;
+  padding-top: 150px;
+}
+.btn.home {
+  margin-top: 30px;
 }
 .inline-dropdown, .inline-dropdown-text {
   margin: 0 auto;
@@ -63,7 +74,7 @@ table, th, td {
 .htDimmed {
   color: blue;
 }
-.tableCampaigns {
+.tableCampaigns, .tableDateCampaigns {
   height: 600px;
   overflow: scroll;
   width: 960px;
@@ -76,10 +87,14 @@ table, th, td {
   height: 600px;
   overflow: scroll;
   width: inherit;
-  margin-top: 20px;
+  margin: 20px 0px 30px 100px;
 }
 .large-1.columns {
   color: white;
+}
+.center-me {
+  margin: 0 auto;
+  width: 60%;
 }
 .csv-h1 {
   display: inline-block;
@@ -112,4 +127,36 @@ color: #0073ea;
 /* OTHER */
 .hide-me {
   opacity: 0;
+}
+.placekitten {
+  min-height: 700px;
+  margin-top: -73px;
+
+  background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("http://placekitten.com/800/800");
+  background-size: 100%;
+}
+.home-btn-wrapper {
+  margin: 0 auto;
+  width: 130px;
+}
+.home-border {
+  border-style: solid;
+  border-color: white;
+  margin: 0 auto 40px auto;
+  padding-bottom: 100px;
+}
+.home-border-wrapper {
+  margin: 0 auto;
+  width: 600px;
+  padding-top: 80px;
+}
+.home-border-fill {
+  background-color: rgba(0, 0, 0, 0.3);
+  margin-top: 50px;
+  height: 330px;
 }
